@@ -1,0 +1,33 @@
+module.exports = (gulp: any, plugins: any, paths: any) => {
+  var browserify = require('browserify'),
+      watchify = require('watchify'),
+      source = require('vinyl-source-stream'),
+      buffer = require('vinyl-buffer'),
+      assign = require('lodash.assign');
+
+  var config = require(plugins['path'].join("..", "config", "browserify.config.js")),
+      options = assign({}, watchify.args, config);
+  var bundler = browserify(options);
+
+  bundler.on('update', bundle);
+  bundler.on('log', plugins['util'].log.bind(plugins['util']));
+
+  function bundle() {
+    return bundler
+      .plugin("tsify", { noImplicitAny: true, target: "es5" })
+      .on('error', plugins['util'].log.bind(plugins['util'], 'Browserify Error'))
+      .bundle()
+      .pipe(plugins['plumber']())
+      .pipe(source('bundle.js'))
+      .pipe(buffer())
+      .pipe(plugins['debug']())
+      .pipe(plugins['sourcemaps'].init({ loadMaps: true }))
+      .pipe(plugins['sourcemaps'].write(''))
+      .pipe(gulp.dest(paths.build))
+      .pipe(plugins['ignore'].exclude([ '**/*.map' ]))
+      .pipe(plugins['babel']({ presets: ['babili'] }))
+      .pipe(gulp.dest(paths.dist));
+    }
+
+   return bundle;
+}
