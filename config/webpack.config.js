@@ -49,6 +49,14 @@ module.exports = {
         ]
       },
 
+      // JavaScript Linter
+      {
+        test: /\.js(x?)$/, enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: require(path.resolve(__dirname, 'eslint.json'))
+      },
+
       // JavaScript
       {
         test: /\.js(x?)$/,
@@ -56,6 +64,13 @@ module.exports = {
           { loader: 'uglify-loader' },
           { loader: 'babel-loader', options: babelConfig }
         ]
+      },
+
+      // Stylus Linter
+      {
+        test: /\.styl$/, enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'stylint-loader'
       },
 
       // Stylus
@@ -66,6 +81,22 @@ module.exports = {
           { loader: 'css-loader' },
           { loader: 'stylus-loader' }
         ]
+      },
+
+      // CSS Linter
+      {
+        test: /\.css$/, enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'csslint-loader'
+      },
+
+      // CSS
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
       }
 
     ]
@@ -73,7 +104,8 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '..', 'src', 'index.pug')
+      template: path.join(__dirname, '..', 'src', 'index.pug'),
+      inject: false
     }),
     new webpack.LoaderOptionsPlugin({
       options: {
@@ -81,7 +113,9 @@ module.exports = {
           use: [ require('poststylus')([ 'autoprefixer', 'rucksack-css' ]) ]
         }
       }
-    })
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ],
 
   resolve: {

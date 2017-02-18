@@ -29,14 +29,14 @@ gulp.task('imagemin', require('./tasks/image')(gulp, plugins, paths));
 gulp.task('lint', ['puglint', 'tslint', 'jslint', 'styllint', 'csslint']);
 
 // Build All
-gulp.task('build', ['pug', 'ts', 'js', 'styl', 'css']);
+gulp.task('build', ['pug', 'ts', 'js', 'styl', 'css', 'imagemin']);
 
 // Clean dist and build folders
 gulp.task('clean', require('./tasks/clean')(gulp, plugins, paths));
 
 // Bundle
-gulp.task('webpack', require('./tasks/webpack')(gulp, plugins, paths));
-gulp.task('browserify', require('./tasks/browserify')(gulp, plugins, paths));
+// gulp.task('webpack', require('./tasks/webpack')(gulp, plugins, paths));
+// gulp.task('browserify', require('./tasks/browserify')(gulp, plugins, paths));
 gulp.task('rollup', require('./tasks/rollup')(gulp, plugins, paths));
 
 // Watchfile

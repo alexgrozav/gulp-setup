@@ -1,0 +1,9 @@
+{
+  "environment": "production",
+  "server": {
+    "baseDir": "dist",
+    "routes": {
+      "/node_modules": "modules"
+    }
+  }
+}
