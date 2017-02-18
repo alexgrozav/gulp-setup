@@ -1,7 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
+const development = process.env.NODE_ENV !== 'production';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+require('babel-polyfill');
+
 
 var babelConfig = {
   presets: [
@@ -18,6 +21,8 @@ module.exports = {
     path: path.resolve(__dirname, '..', 'dist'),
     filename: '[name].js'
   },
+
+  devtool: 'source-map',
 
   module: {
     rules: [
@@ -45,6 +50,12 @@ module.exports = {
         use: [
           { loader: 'uglify-loader' },
           { loader: 'babel-loader', options: babelConfig },
+          { loader: 'rollup-webpack-loader', options: {
+            plugins: [
+              require('rollup-plugin-commonjs')(),
+              require('rollup-plugin-node-resolve')({ jsnext: true, main: true })
+            ]
+          }},
           { loader: 'ts-loader', options: { configFile: path.resolve(__dirname, 'tsconfig.json') }}
         ]
       },
@@ -114,8 +125,13 @@ module.exports = {
         }
       }
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      debug: false
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+
+    development ? new webpack.HotModuleReplacementPlugin() : null
   ],
 
   resolve: {
