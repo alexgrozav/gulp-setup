@@ -1,8 +1,10 @@
 # Webpack 2 Boilerplate
 
-This is a complete Webpack 2 boilerplate using TypeScript and Stylus with compilation and linting functionality. To show how to use webpack together with a server, there's a `server.js` file with a basic ExpressJS setup.
+This is a complete Gulp workflow setup bundled with Rollup and Webpack 2 using TypeScript and Stylus with compilation and linting functionality. To show how to use webpack together with a server, there's a `server.js` file with a basic ExpressJS setup.
 
 Simply work with the files in the `src` folder, WebPack will automatically compile and reload the files in the browser. The ExpressJS server runs on `http://localhost:3000` by default.
+
+The build system processes all files using Gulp + Rollup into the `build` folder, then bundles everything for production using Webpack 2, inside the `dist` folder.
 
 
 ### Development Server
@@ -26,10 +28,9 @@ NODE_ENV=production npm start
 ~~~
 
 ## Configuration
-To update the current configuration
+To update the current configuration, make sure you modify the files in the `config` folder.
 
-
-## How to contribute to Webpack Boilerplate
+## How to contribute to Gulp Webpack Boilerplate
 
 #### **Did you find a bug?**
 
