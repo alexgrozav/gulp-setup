@@ -1,9 +1,0 @@
-{
-  "environment": "development",
-  "server": {
-    "baseDir": "build",
-    "routes": {
-      "/node_modules": "node_modules"
-    }
-  }
-}

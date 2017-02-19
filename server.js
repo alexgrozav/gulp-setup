@@ -1,44 +1,31 @@
+// Utilities
+const _ = require('lodash');
 const path = require('path');
-const express = require('express');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require(path.join(__dirname, 'config', 'webpack.config.js'));
 
-const development = process.env.NODE_ENV !== 'production';
+// Application
+const express = require('express');
 const port = 3000;
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'src'));
+// Environment
+const development = process.env.NODE_ENV !== 'production';
+const config = require(path.join(__dirname, 'config', 'env', (development ? 'development.js' : 'production.js')));
 
-if (development) {
-  const compiler = webpack(config);
-  const middleware = webpackMiddleware(compiler, {
-    index: 'index.pug',
-    publicPath: '/',
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
-  });
-
-  app.use(middleware);
-  app.use(webpackHotMiddleware(compiler));
-
-  app.get('*', function response(req, res) {
-    res.render('index', { title: 'Main' });
-  });
+if(development) {
+  app.set('view engine', 'pug');
+  app.set('views', path.join(__dirname, 'src'));
+  app.use(express.static(path.join(__dirname, 'build')));
 } else {
+  app.set('view engine', 'html');
+  app.set('views', path.join(__dirname, 'dist'));
   app.use(express.static(path.join(__dirname, 'dist')));
-  app.get('*', function response(req, res) {
-    res.render('index', { title: 'Main' });
-  });
 }
+
+app.get('/', function response(req, res) {
+  res.render('index', _.assign({}, config, {
+    title: 'Gulp Webpack Boilerplate'
+  }));
+});
 
 app.listen(port, '0.0.0.0', function onStart(err) {
   if (err) {

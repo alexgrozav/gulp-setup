@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
+
 const development = process.env.NODE_ENV !== 'production';
+const config = require(path.join(__dirname, 'env', 'production.js')) ;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 require('babel-polyfill');
@@ -31,7 +33,9 @@ module.exports = {
       {
         test: /\.pug$/,
         use: [
-          { loader: 'pug-loader' }
+          { loader: 'pug-html-loader', options: {
+            data: config
+          }}
         ]
       },
 
@@ -108,23 +112,27 @@ module.exports = {
           { loader: 'style-loader' },
           { loader: 'css-loader' }
         ]
-      }
+      },
 
       // Image
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         loaders: [
-          'file-loader',
           {
-            loader: 'image-webpack-loader',
+            loader: 'file-loader',
+            options: {
+              name: '[publicPath][name].[ext]'
+            }
+          },
+          { loader: 'image-webpack-loader',
             query: {
               progressive: true,
               optimizationLevel: 7,
               interlaced: false,
-              pngquant: {
-                quality: '65-75',
-                speed: 4
-              }
+
+              gifsicle: { interlaced: false },
+              optipng: { optimizationLevel: 7 },
+              pngquant: { quality: '65-75', speed: 4 }
             }
           }
         ]
