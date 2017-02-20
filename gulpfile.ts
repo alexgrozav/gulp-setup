@@ -3,7 +3,10 @@ var gulp = require('gulp'),
     config = require('./config/gulp.config'),
     paths = config['paths'],
     path = require('path'),
-    runSequence = require('run-sequence');
+    nodemon = require('gulp-nodemon');
+
+plugins['run-sequence'] = require('run-sequence');
+plugins['browser-sync'] = require('browser-sync').create();
 plugins['rollup'] = plugins['betterRollup'];
 plugins['rollup.babel'] = require('rollup-plugin-babel');
 plugins['rollup.commonjs'] = require('rollup-plugin-commonjs');
@@ -35,21 +38,24 @@ gulp.task('imagemin', require('./tasks/image')(gulp, plugins, paths));
 gulp.task('lint', ['puglint', 'tslint', 'jslint', 'styllint', 'csslint']);
 
 // Build All
-
 gulp.task('build', () => {
-  return runSequence('clean', ['pug', 'ts', 'js', 'styl', 'css', 'imagemin'], ['rollup', 'webpack'])
+  return plugins['run-sequence']('clean', ['pug', 'ts', 'js', 'styl', 'css', 'imagemin'], ['rollup', 'webpack'])
 });
 
 // Clean dist and build folders
-gulp.task('clean', require('./tasks/clean')(gulp, plugins, paths));
+gulp.task('clean', require('./tasks/clean')(gulp, plugins, paths)); 
 
 // Bundle
 gulp.task('webpack', require('./tasks/webpack')(gulp, plugins, paths));
 gulp.task('rollup', require('./tasks/rollup')(gulp, plugins, paths));
 // gulp.task('browserify', require('./tasks/browserify')(gulp, plugins, paths));
 
+// Livereload
+gulp.task('nodemon', require('./tasks/nodemon')(gulp, plugins, paths));
+gulp.task('browser-sync', ['nodemon'], require('./tasks/browser-sync')(gulp, plugins, paths));
+
 // Watchfile
 gulp.task('watch', require('./tasks/watch')(gulp, plugins, paths));
 
 // Default Task
-gulp.task('default', [ 'build', 'watch' ])
+gulp.task('default', [ 'browser-sync', 'watch' ])

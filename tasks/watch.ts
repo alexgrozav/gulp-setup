@@ -15,21 +15,15 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
 
     // Watch JS
     gulp.watch(
-      plugins['path'].join(paths.src, paths.typescript), [ 'ts', 'tslint' ]
+      plugins['path'].join(paths.src, paths.typescript), () => {
+        return plugins['run-sequence']([ 'ts', 'tslint' ], 'rollup')
+      }
     );
     gulp.watch(
-      plugins['path'].join(paths.src, paths.javascript), [ 'js', 'jslint' ]
+      plugins['path'].join(paths.src, paths.javascript), () => {
+        return plugins['run-sequence']([ 'js', 'jslint' ], 'rollup')
+      }
     );
-
-    // Bundle
-    gulp.watch(
-      plugins['path'].join(paths.src, '**/*.{ts,js}'), [ 'rollup', 'webpack' ]
-    );
-
-    // Watch Bundles
-    // gulp.watch(
-    //   plugins['path'].join(paths.build, paths.entry), [ 'webpack' ]
-    // );
 
     // Watch Images
     gulp.watch(

@@ -8,6 +8,7 @@ module.exports = {
   },
   assets: {
     scripts: [
+      'polyfill',
       'assets/js/jquery/jquery',
       'assets/js/bootstrap/bootstrap'
     ]

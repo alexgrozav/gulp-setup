@@ -1,20 +1,12 @@
 module.exports = (gulp: any, plugins: any, paths: any) => {
-  var srcPath = plugins['path'].join(paths.src, paths.javascript);
+  var srcPath = plugins['path'].join(paths.src, paths.javascript),
+      esLintConfig = require(plugins['path'].join(__dirname, '..', 'config', 'eslint.json'));
 
   return () => {
     return gulp.src(srcPath)
       .pipe(plugins['debug']())
       .pipe(plugins['plumber']())
-      .pipe(plugins['eslint']({
-        parserOptions: {
-          "ecmaVersion": 6,
-          "sourceType": "module",
-          "ecmaFeatures": {
-              "jsx": true
-          }
-        },
-        configFile: plugins['path'].join('config', 'eslint.json')
-      }))
+      .pipe(plugins['eslint'](esLintConfig))
       .pipe(plugins['eslint'].format());
   }
 }

@@ -20,6 +20,7 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
         .pipe(plugins['autoprefixer']())
         .pipe(plugins['sourcemaps'].write(plugins['path'].join('..', paths.build)))
         .pipe(gulp.dest(paths.build))
+        .pipe(plugins['browser-sync'].stream())
         // .pipe(plugins['ignore'].exclude([ '**/*.map' ]))
         // .pipe(plugins['cssmin']())
         // .pipe(gulp.dest(paths.dist));

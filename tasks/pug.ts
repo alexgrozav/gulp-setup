@@ -15,6 +15,7 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
         extname: '.html'
       }))
       .pipe(gulp.dest(paths.build))
+      .pipe(plugins['browser-sync'].stream())
       // .pipe(plugins['htmlmin']())
       // .pipe(gulp.dest(paths.dist));
   }

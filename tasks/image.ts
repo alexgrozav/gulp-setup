@@ -14,6 +14,7 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
       }))
       .pipe(plugins['bytediff'].stop())
       .pipe(gulp.dest(paths.build))
+      .pipe(plugins['browser-sync'].stream())
       // .pipe(gulp.dest(paths.dist));
   }
 }

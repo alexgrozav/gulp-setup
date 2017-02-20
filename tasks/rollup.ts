@@ -4,6 +4,7 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
 
   return () => {
     gulp.src(srcPath)
+      .pipe(plugins['cached']('rollup'))
       .pipe(plugins['debug']())
       .pipe(plugins['sourcemaps'].init())
       .pipe(plugins['plumber']())
@@ -17,8 +18,7 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
           plugins['rollup.commonjs']()
         ]
       }, {
-        // also rollups `sourceMap` option is replaced by gulp-sourcemaps plugin
-        format: 'cjs',
+        format: 'umd',
       }))
       .pipe(plugins['sourcemaps'].write(plugins['path'].join('..', paths.build)))
       .pipe(gulp.dest(paths.build))

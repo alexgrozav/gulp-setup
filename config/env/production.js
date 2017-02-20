@@ -8,7 +8,6 @@ module.exports = {
   },
   assets: {
     scripts: [
-      'polyfill',
       'main'
     ]
   }
