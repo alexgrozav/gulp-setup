@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   var srcPath = plugins['path'].join(paths.src, paths.image);
 
   return () => {
@@ -7,7 +7,7 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
       .pipe(plugins['debug']())
       .pipe(plugins['plumber']())
       .pipe(plugins['bytediff'].start())
-      .pipe(plugins['gm']((gmfile: any) => {
+      .pipe(plugins['gm']((gmfile) => {
         return gmfile.strip()
                      .quality(75)
                      .interlace('Line')

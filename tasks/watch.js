@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   return () => {
     // Watch HTML
     gulp.watch(

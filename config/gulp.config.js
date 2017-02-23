@@ -5,6 +5,7 @@ module.exports = {
     src: "src",
     build: "build",
     dist: "dist",
+    config: "config",
     pug: path.join("**", "*.pug"),
     html: path.join("**", "*.html"),
     typescript: path.join("**", "*.ts"),

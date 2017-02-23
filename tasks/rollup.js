@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   var srcPath = plugins['path'].join(paths.build, paths.javascript);
       // tsProject = plugins['typescript'].createProject("tsconfig.json");
 

@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   var browserify = require('browserify'),
       watchify = require('watchify'),
       source = require('vinyl-source-stream'),

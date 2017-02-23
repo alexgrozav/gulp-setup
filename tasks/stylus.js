@@ -1,11 +1,11 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   var srcPath = plugins['path'].join(paths.src, paths.stylus),
       nib = require('nib');
 
   return () => {
     return gulp.src(srcPath)
         .pipe(plugins['cached']('stylus'))
-        .pipe(plugins.ignore((file: any) => { /\_.+\.styl$/.test(file.relative) }))
+        .pipe(plugins.ignore((file) => { /\_.+\.styl$/.test(file.relative) }))
         .pipe(plugins['debug']())
         .pipe(plugins['sourcemaps'].init())
         .pipe(plugins['plumber']())
