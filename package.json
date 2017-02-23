@@ -17,10 +17,15 @@
   ],
   "author": "Alex Grozav (Pixevil)",
   "license": "MIT",
+  "dependencies": {
+    "concurrently": "^3.3.0",
+    "express": "^4.14.1",
+    "jquery": "^3.1.1"
+  },
   "devDependencies": {
     "@types/lodash": "^4.14.52",
     "@types/node": "^7.0.5",
-    "autoprefixer": "^6.7.3",
+    "autoprefixer": "^6.7.5",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-polyfill": "^6.23.0",
@@ -98,11 +103,6 @@
     "webpack-dev-server": "^2.3.0",
     "webpack-hot-middleware": "^2.17.0",
     "zone.js": "^0.7.7"
-  },
-  "dependencies": {
-    "concurrently": "^3.3.0",
-    "express": "^4.14.1",
-    "jquery": "^3.1.1"
   },
   "repository": "https://github.com/pixevil/webpack-boilerplate.git"
 }

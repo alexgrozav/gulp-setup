@@ -24,7 +24,6 @@
   "namingConventionStrict": true,
   "none": "always",
   "noImportant": true,
-  "parenSpace": "always",
   "placeholders": "always",
   "prefixVarsWithDollar": "always",
   "quotePref": "double",
