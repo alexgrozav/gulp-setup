@@ -1,9 +1,9 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   var buildPath = plugins['path'].join(paths.build),
       distPath = plugins['path'].join(paths.dist);
 
-  return (callback: any) => {
-    var called: boolean = false;
+  return (callback) => {
+    var called = false;
 
     return plugins['nodemon']({
       script: 'server.js',
@@ -12,7 +12,8 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
         'NODE_ENV': 'development'
       },
       watch: [
-        plugins['path'].join(paths.src, '**', '*')
+        plugins['path'].join('server.js'),
+        plugins['path'].join(paths.config, '**', '*')
       ]
     }).on('start', function () {
       if (!called) {

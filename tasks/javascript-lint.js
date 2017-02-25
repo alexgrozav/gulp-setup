@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   var srcPath = plugins['path'].join(paths.src, paths.javascript),
       esLintConfig = require(plugins['path'].join(__dirname, '..', 'config', 'eslint.json'));
 

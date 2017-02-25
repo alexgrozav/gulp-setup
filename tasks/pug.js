@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   const srcPath = plugins['path'].join(paths.src, paths.pug);
   const config = require(plugins['path'].join(__dirname, '..', 'config', 'env', 'development.js'));
 

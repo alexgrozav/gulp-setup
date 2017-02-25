@@ -1,4 +1,4 @@
-module.exports = (gulp: any, plugins: any, paths: any) => {
+module.exports = (gulp, plugins, paths) => {
   return () => {
     // Watch HTML
     gulp.watch(
@@ -16,12 +16,12 @@ module.exports = (gulp: any, plugins: any, paths: any) => {
     // Watch JS
     gulp.watch(
       plugins['path'].join(paths.src, paths.typescript), () => {
-        return plugins['run-sequence']([ 'ts', 'tslint' ], 'rollup')
+        return plugins['run-sequence']([ 'ts', 'tslint' ], 'browserify')
       }
     );
     gulp.watch(
       plugins['path'].join(paths.src, paths.javascript), () => {
-        return plugins['run-sequence']([ 'js', 'jslint' ], 'rollup')
+        return plugins['run-sequence']([ 'js', 'jslint' ], 'browserify')
       }
     );
 

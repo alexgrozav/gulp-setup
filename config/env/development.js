@@ -8,8 +8,9 @@ module.exports = {
   },
   assets: {
     scripts: [
-      'polyfill',
+      // 'polyfill',
       'vendors/jquery/jquery',
+      'vendors/tether/tether',
       'vendors/bootstrap/bootstrap'
     ],
     stylesheets: [

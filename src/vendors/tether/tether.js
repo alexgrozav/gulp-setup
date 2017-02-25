@@ -1,0 +1,1 @@
+window.Tether = require('tether');
