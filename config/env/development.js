@@ -9,8 +9,11 @@ module.exports = {
   assets: {
     scripts: [
       'polyfill',
-      'assets/js/jquery/jquery',
-      'assets/js/bootstrap/bootstrap'
+      'vendors/jquery/jquery',
+      'vendors/bootstrap/bootstrap'
+    ],
+    stylesheets: [
+      'vendors/bootstrap/bootstrap'
     ]
   }
 };

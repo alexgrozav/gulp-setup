@@ -15,6 +15,7 @@ if(development) {
   app.set('view engine', 'pug');
   app.set('views', path.join(__dirname, 'src'));
   app.use(express.static(path.join(__dirname, 'build')));
+  app.use(express.static(path.join(__dirname, 'node_modules')));
 } else {
   app.set('view engine', 'html');
   app.set('views', path.join(__dirname, 'dist'));
