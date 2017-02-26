@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   environment: 'production',
   server: {
@@ -6,9 +8,5 @@ module.exports = {
       '/node_modules': 'node_modules'
     }
   },
-  assets: {
-    scripts: [
-      'main'
-    ]
-  }
+  assets: require(path.join(__dirname, 'assets.production.json'))
 };

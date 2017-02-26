@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   environment: 'development',
   server: {
@@ -6,16 +8,5 @@ module.exports = {
       '/node_modules': 'node_modules'
     }
   },
-  assets: {
-    scripts: [
-      // 'polyfill',
-      'vendors/jquery/jquery',
-      'vendors/tether/tether',
-      'vendors/bootstrap/bootstrap'
-    ],
-    stylesheets: [
-      'resources/application/application',
-      'vendors/bootstrap/bootstrap'
-    ]
-  }
+  assets: require(path.join(__dirname, 'assets.development.json'))
 };

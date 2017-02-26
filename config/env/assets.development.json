@@ -1,0 +1,11 @@
+{
+  "scripts": [
+    "vendors/jquery/jquery.js",
+    "vendors/tether/tether.js",
+    "vendors/bootstrap/bootstrap.js"
+  ],
+  "stylesheets": [
+    "resources/css/application/application.styl",
+    "vendors/bootstrap/bootstrap.scss"
+  ]
+}
