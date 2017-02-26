@@ -98,6 +98,27 @@ module.exports = {
         ]
       },
 
+      // Sass Linter
+      {
+        test: /\.s(a|c)ss$/, enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'sass-loader'
+      },
+
+      // Sass
+      {
+        test: /\.s(a|c)ss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader',
+            options: {
+              includePaths: path.join(__dirname, '..', 'node_modules')
+            }
+          }
+        ]
+      },
+
       // CSS Linter
       {
         test: /\.css$/, enforce: 'pre',
