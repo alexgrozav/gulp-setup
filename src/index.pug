@@ -1,8 +1,8 @@
 html(lang="en")
   head
     if assets && assets.stylesheets
-      - for(let i = 0; i < assets.scripts.stylesheets; i++) 
-        link(href=assets.stylesheets[i] + ".css" rel="stylesheet" type="text/css")
+      - for(let i = 0; i < assets.stylesheets.length; i++) 
+        link(href=stylesheet rel="stylesheet" type="text/css")
 
   body
     h1 Hello world!
@@ -11,4 +11,4 @@ html(lang="en")
 
     if assets && assets.scripts
       - for(let i = 0; i < assets.scripts.length; i++) 
-        script(src=assets.scripts[i] + ".js" type="text/javascript")
+        script(src=script type="text/javascript")

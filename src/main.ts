@@ -1,11 +1,11 @@
-const config = require('../config/env/development');
+const assets = require('../config/env/assets.development.json');
 
-for(let i = 0; i < config.assets.stylesheets.length; i += 1){
-  let stylesheet = config.assets.stylesheets[i];
+for(let i = 0; i < assets.stylesheets.length; i += 1){
+  let stylesheet = assets.stylesheets[i];
   require(stylesheet);
 }
 
-for(let i = 0; i < config.assets.scripts.length; i += 1){
-  let script = config.assets.scripts[i];
+for(let i = 0; i < assets.scripts.length; i += 1){
+  let script = assets.scripts[i];
   require(script);
 }
