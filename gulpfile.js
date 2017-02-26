@@ -43,6 +43,12 @@ gulp.task('styl',
 gulp.task('stylint',
   require(path.join(__dirname, 'tasks', 'stylus-lint'))(gulp, plugins, paths)
 );
+gulp.task('sass',
+  require(path.join(__dirname, 'tasks', 'sass'))(gulp, plugins, paths)
+);
+gulp.task('sasslint',
+  require(path.join(__dirname, 'tasks', 'sass-lint'))(gulp, plugins, paths)
+);
 gulp.task('css',
   require(path.join(__dirname, 'tasks', 'css'))(gulp, plugins, paths)
 );
@@ -57,14 +63,14 @@ gulp.task('imagemin',
 
 // Lint All
 gulp.task('lint',
-  [ 'puglint', 'tslint', 'jslint', 'styllint', 'csslint' ]
+  [ 'puglint', 'tslint', 'jslint', 'styllint', 'sasslint', 'csslint' ]
 );
 
 // Build All
 gulp.task('build', () => {
   return plugins['run-sequence'](
     'clean',
-    ['pug', 'ts', 'js', 'styl', 'css', 'imagemin'],
+    ['pug', 'ts', 'js', 'styl', 'sass', 'css', 'imagemin'],
     ['browserify', 'webpack']
   );
 });
