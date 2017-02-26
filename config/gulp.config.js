@@ -12,8 +12,7 @@ module.exports = {
     coffeescript: path.join("**", "*.coffee"),
     javascript: path.join("**", "*.js"),
     stylus: path.join("**", "*.styl"),
-    scss: path.join("**", "*.scss"),
-    sass: path.join("**", "*.sass"),
+    sass: path.join("**", "*.{sass,scss}"),
     css: path.join("**", "*.css"),
     image: path.join("**", "*.{jpg,png,gif}"),
     font: path.join("**", "*.{eot,svg,ttf,woff,woff2}")
