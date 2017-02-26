@@ -1,6 +1,13 @@
 module.exports = (gulp, plugins, paths) => {
   const srcPath = plugins['path'].join(paths.src, paths.pug);
-  const config = require(plugins['path'].join(__dirname, '..', 'config', 'env', 'development.js'));
+
+  let assets = require(plugins['path'].join(__dirname, '..', 'config', 'env', 'assets.development.json'));
+  assets.scripts = assets.scripts.map((file) => {
+    return file.substr(0, file.lastIndexOf('.')) + '.js';
+  })
+  assets.stylesheets = assets.stylesheets.map((file) => {
+    return file.substr(0, file.lastIndexOf('.')) + '.css';
+  })
 
   return () => {
     return gulp.src(srcPath)
@@ -9,7 +16,9 @@ module.exports = (gulp, plugins, paths) => {
       .pipe(plugins['plumber']())
       .pipe(plugins['pug']({
         pretty: true,
-        locals: config
+        locals: {
+          assets: assets
+        }
       }))
       .pipe(plugins['rename']({
         extname: '.html'
