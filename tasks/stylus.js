@@ -26,6 +26,7 @@ module.exports = (gulp, plugins, paths) => {
         .pipe(plugins['plumber']())
         .pipe(plugins['stylus']({
           'resolve url': true,
+          'include': 'node_modules',
           'url': 'embedurl',
           'use': [
             poststylus([
