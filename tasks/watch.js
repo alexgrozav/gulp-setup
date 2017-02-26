@@ -10,6 +10,9 @@ module.exports = (gulp, plugins, paths) => {
       plugins['path'].join(paths.src, paths.stylus), [ 'styl', 'styllint' ]
     );
     gulp.watch(
+      plugins['path'].join(paths.src, paths.sass), [ 'sass', 'sasslint' ]
+    );
+    gulp.watch(
       plugins['path'].join(paths.src, paths.css), [ 'css', 'csslint' ]
     );
 

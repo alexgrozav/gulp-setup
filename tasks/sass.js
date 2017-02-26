@@ -14,24 +14,21 @@ module.exports = (gulp, plugins, paths) => {
   }
 
   return () => {
+    let indentedSyntax = true;
+
     return gulp.src(srcPath)
         .pipe(plugins['cached']('sass'))
         .pipe(plugins['rename'](partial))
         .pipe(plugins['ignore']((file) => {
-          return /\_.+\.styl$/.test(file.relative)
+          indentedSyntax = !!/\.sass$/.test(file.relative)
+          return /\_.+\.s(a|c)ss$/.test(file.relative)
         }))
         .pipe(plugins['debug']())
         .pipe(plugins['sourcemaps'].init())
         .pipe(plugins['plumber']())
-        .pipe(plugins['stylus']({
-          'resolve url': true,
-          'url': 'embedurl',
-          'use': [
-            poststylus([
-              'autoprefixer',
-              'rucksack-css'
-            ])
-          ]
+        .pipe(plugins['sass']({
+          includePaths: plugins['path'].join(__dirname, '..', 'node_modules'),
+          indentedSyntax: indentedSyntax
         }))
         .pipe(plugins['sourcemaps'].write(plugins['path'].join('..', paths.build)))
         .pipe(gulp.dest(paths.build))
