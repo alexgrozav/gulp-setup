@@ -1,19 +1,41 @@
-const webpack = require('webpack');
-const path = require('path');
+// Webpack
+//
+// Provides compilation and linting for Pug, TypeScript, JS, Stylus, Sass, CSS
+// files, image minification and several file optimizations
+//
 
+// Dependencies
+//
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const babel = require('babel-polyfill');
+
+const path = require('path');
 const development = process.env.NODE_ENV !== 'production';
 const config = require(path.join(__dirname, 'env', 'production.js')) ;
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-require('babel-polyfill');
 
+// Assets
+//
+let assets = require(path.join(__dirname, 'env', 'assets.development.json'));
+assets.scripts = assets.scripts.map((file) => {
+  return file.substr(0, file.lastIndexOf('.')) + '.js';
+})
+assets.stylesheets = assets.stylesheets.map((file) => {
+  return file.substr(0, file.lastIndexOf('.')) + '.css';
+})
 
+// Babel Configuration
+//
 var babelConfig = {
   presets: [
     [ 'es2015', { loose: true, modules: false } ]
   ]
 };
 
+
+// Webpack Configuration
+//
 module.exports = {
   entry: {
     polyfill: path.resolve(__dirname, '..', 'src', 'polyfill.ts'),
@@ -34,7 +56,9 @@ module.exports = {
         test: /\.pug$/,
         use: [
           { loader: 'pug-html-loader', options: {
-            data: config
+            data: {
+              assets: assets
+            }
           }}
         ]
       },
@@ -132,6 +156,14 @@ module.exports = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' }
+        ]
+      },
+
+      // JSON
+      {
+        test: /\.json$/,
+        use: [
+          { loader: 'json-loader' }
         ]
       },
 
