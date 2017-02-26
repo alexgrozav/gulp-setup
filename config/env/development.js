@@ -14,6 +14,7 @@ module.exports = {
       'vendors/bootstrap/bootstrap'
     ],
     stylesheets: [
+      'resources/application/application',
       'vendors/bootstrap/bootstrap'
     ]
   }
