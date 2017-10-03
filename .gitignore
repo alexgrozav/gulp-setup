@@ -1,0 +1,25 @@
+# Compiled
+build
+dist
+
+# Dependency directory
+node_modules
+typings
+ts-node
+
+# Users Environment Variables
+.lock-wscript
+.tsdrc
+.typingsrc
+
+#IDE configuration files
+.idea
+*.iml
+.editorconfig
+
+# Temporary
+dev
+tmp
+
+# OS X trash files
+.DS_Store
