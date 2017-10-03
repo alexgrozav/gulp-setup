@@ -1,0 +1,28 @@
+{
+  "name": "gulp-webpack",
+  "version": "1.0.0",
+  "description": "A boilerplate for flawless gulp workflow and bundling with webpack.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexgrozav/gulp-webpack.git"
+  },
+  "keywords": [
+    "gulp",
+    "webpack",
+    "boilerplate"
+  ],
+  "author": "Alex Grozav (http://grozav.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexgrozav/gulp-webpack/issues"
+  },
+  "homepage": "https://github.com/alexgrozav/gulp-webpack#readme"
+}
