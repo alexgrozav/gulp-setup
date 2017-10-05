@@ -1,12 +1,10 @@
-module.exports = (gulp, plugins, config, task) => () => {
+module.exports = ($, gulp, config, task) => {
   let paths = [];
-  if (config.build) paths.push(config.build);
-  if (config.dist) paths.push(config.dist);
+  if (!!config.build) paths.push(config.build);
+  if (!!config.dist) paths.push(config.dist);
 
-  return () => {
-    return gulp.src(paths, { read: false })
-      .pipe(plugins['debug']())
-      .pipe(plugins['plumber']())
-      .pipe(plugins['clean']());
-  }
+  return () => gulp.src(paths, { read: false })
+    .pipe($.debug())
+    .pipe($.plumber())
+    .pipe($.clean());
 }
