@@ -1,27 +1,53 @@
-module.exports = (gulp, plugins, config, task) => () => {
-  return gulp.src(plugins['path'].join(config.src, task.pattern))
+module.exports = ($, gulp, config, task) => () =>
+  gulp.src($.path.join(config.src, task.pattern))
+    // Stream task initialization process
+    //
+    .pipe(task.process.init())
+
+
     // Cache files that have been already processed
     //
-    .pipe(plugins['if'](config.cache, plugins['cached'](task.name)))
+    .pipe($.if(config.cache, $.cached(task.name)))
 
     // List files that are being processed
     //
-    .pipe(plugins['if'](config.debug, plugins['debug']()))
+    .pipe($.if(config.debug, $.debug()))
 
     // Use plumber to catch unhandled exceptions
     //
-    .pipe(plugins['plumber']())
+    .pipe($.plumber())
+
+    // Run build process and write sourcemaps
+    //
+    .pipe($.sourcemaps.init())
+    .pipe(task.process.build())
+    .pipe($.sourcemaps.write())
 
     // Process files for local development use
     //
-    .pipe(plugins['if'](config.build, () => plugins['lazypipe']()
-      .pipe(gulp.dest(config.build))
-      .pipe(plugins['browser-sync'].stream())
+    .pipe($.if(!!config.build, $.lazypipe()
+      .pipe(gulp.dest, config.build)
+      .call(this)
     ))
+
+    // Stream and synchronize files to the browser
+    //
+    .pipe($.browserSync.stream())
+
+    // Run dist process
+    //
+    .pipe(task.process.dist())
 
     // Process files for distribution
     //
-    .pipe(plugins['if'](config.build, () => plugins['lazypipe']()
-      .pipe(gulp.dest(config.dist))
+    .pipe($.if(!!config.dist, $.lazypipe()
+      .pipe(gulp.dest, config.dist)
+      .call(this)
     ))
-}
+
+    // Stream task ending process
+    //
+    .pipe($.if(!!task.process.end, $.lazypipe()
+      .pipe(task.process.end)
+      .call(this)
+    ));
