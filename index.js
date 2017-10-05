@@ -1,90 +1,97 @@
-module.exports = (gulp, plugins, config) => {
-  //
-  // Add additional entries to the plugins loader
-  //
-  plugins['path'] = require('path');
-  plugins['run-sequence'] = require('run-sequence');
-  plugins['browser-sync'] = require('browser-sync').create();
+module.exports = ($, gulp, config) => {
+  /*
+   * Add additional entries to the $ loader
+   */
+  $.path = require('path');
+  $.lazypipe = require('lazypipe');
+  $.runSequence = require('run-sequence');
+  $.browserSync = require('browser-sync').create();
 
 
-  //
-  // Helpers
-  //
-  const loadTask = require(plugins['path'].join(__dirname, 'helpers', 'task-loader'));
+  /*
+   * Helpers
+   */
+  const loadTask = require($.path.join(__dirname, 'helpers', 'task-loader'));
 
 
-  //
-  // Gulp configuration for individual tasks
-  //
+  /**
+   * Gulp configuration for individual tasks
+   */
   config = Object.assign({
-    src: plugins['path'].join(__dirname, 'src'),
-    build: plugins['path'].join(__dirname, 'build'),
-    dist: plugins['path'].join(__dirname, 'dist'),
+    src: $.path.join(__dirname, 'src'),
+    build: $.path.join(__dirname, 'build'),
+    dist: $.path.join(__dirname, 'dist'),
     cache: true,
     debug: true,
     tasks: {
       default: {
-        task: ['clean', 'build']
-      },
-      clean: {
-        task: plugins['path'].join(__dirname, 'tasks', 'clean')
+        process: () => $.runSequence('build')
       },
       build: {
-        task: ['clean', 'build']
+        process: () => {
+          let tasks = [];
+          Object.keys(config.tasks).forEach((name) => {
+            if (config.tasks[name].pattern) tasks.push(name);
+          });
+
+          return $.runSequence('clean', tasks);
+        }
+      },
+      clean: {
+        process: $.path.join(__dirname, 'tasks', 'clean')
       },
       html: {
-        task: plugins['path'].join(__dirname, 'tasks', 'html'),
-        base: plugins['path'].join(__dirname, 'base', 'compile'),
-        pattern: plugins['path'].join('**', '*.html')
+        process: $.path.join(__dirname, 'tasks', 'html'),
+        base: $.path.join(__dirname, 'base', 'compile'),
+        pattern: $.path.join('**', '*.html')
       // },
       // pug: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'pug'),
-      //   pattern: plugins['path'].join('**', '*.pug')
+      //   process: $.path.join(__dirname, 'tasks', 'pug'),
+      //   pattern: $.path.join('**', '*.pug')
       // },
       // javascript: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'javascript'),
-      //   pattern: plugins['path'].join('**', '*.js')
+      //   process: $.path.join(__dirname, 'tasks', 'javascript'),
+      //   pattern: $.path.join('**', '*.js')
       // },
       // coffeescript: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'coffeescript'),
-      //   pattern: plugins['path'].join('**', '*.coffee')
+      //   process: $.path.join(__dirname, 'tasks', 'coffeescript'),
+      //   pattern: $.path.join('**', '*.coffee')
       // },
       // typescript: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'typescript'),
-      //   pattern: plugins['path'].join('**', '*.ts')
-      // },
-      // css: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'css'),
-      //   pattern: plugins['path'].join('**', '*.css')
+      //   process: $.path.join(__dirname, 'tasks', 'typescript'),
+      //   pattern: $.path.join('**', '*.ts')
+      },
+      css: {
+        process: $.path.join(__dirname, 'tasks', 'css'),
+        base: $.path.join(__dirname, 'base', 'compile'),
+        pattern: $.path.join('**', '*.css')
       // },
       // stylus: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'stylus'),
-      //   pattern: plugins['path'].join('**', '*.styl')
-      // },
-      // sass: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'sass'),
-      //   pattern: plugins['path'].join('**', '*.{sass,scss}')
+      //   process: $.path.join(__dirname, 'tasks', 'stylus'),
+      //   pattern: $.path.join('**', '*.styl')
+      },
+      sass: {
+        process: $.path.join(__dirname, 'tasks', 'sass'),
+        base: $.path.join(__dirname, 'base', 'compile'),
+        pattern: $.path.join('**', '*.{sass,scss}')
       // },
       // image: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'image'),
-      //   pattern: plugins['path'].join('**', '*.{svg,jpg,png,gif}')
+      //   process: $.path.join(__dirname, 'tasks', 'image'),
+      //   pattern: $.path.join('**', '*.{svg,jpg,png,gif}')
       // },
       // font: {
-      //   task: plugins['path'].join(__dirname, 'tasks', 'font'),
-      //   pattern: plugins['path'].join('**', '*.{eot,svg,ttf,woff,woff2}')
+      //   process: $.path.join(__dirname, 'tasks', 'font'),
+      //   pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
       }
     }
   }, config || {});
 
 
-
   // Create gulp tasks for each task in the configuration
   //
+  // let sequences = [];
   Object.keys(config.tasks).forEach((name) => {
     config.tasks[name].name = name;
-
-    console.log(name, loadTask(gulp, plugins, config, config.tasks[name]))
-
-    gulp.task(name, loadTask(gulp, plugins, config, config.tasks[name]));
+    gulp.task(name, loadTask($, gulp, config, config.tasks[name]));
   });
 };
