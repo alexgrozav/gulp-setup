@@ -1,6 +1,6 @@
 {
-  "name": "gulp-webpack",
-  "version": "1.0.0",
+  "name": "gulp-setup",
+  "version": "1.0.1",
   "description": "A boilerplate for flawless gulp workflow and bundling with webpack.",
   "main": "index.js",
   "dependencies": {
