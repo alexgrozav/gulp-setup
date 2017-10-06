@@ -48,10 +48,11 @@ module.exports = ($, gulp, config) => {
       // pug: {
       //   process: $.path.join(__dirname, 'tasks', 'pug'),
       //   pattern: $.path.join('**', '*.pug')
-      // },
-      // javascript: {
-      //   process: $.path.join(__dirname, 'tasks', 'javascript'),
-      //   pattern: $.path.join('**', '*.js')
+      },
+      javascript: {
+        process: $.path.join(__dirname, 'tasks', 'javascript'),
+        base: $.path.join(__dirname, 'base', 'compile'),
+        pattern: $.path.join('**', '*.js')
       // },
       // coffeescript: {
       //   process: $.path.join(__dirname, 'tasks', 'coffeescript'),
@@ -65,10 +66,11 @@ module.exports = ($, gulp, config) => {
         process: $.path.join(__dirname, 'tasks', 'css'),
         base: $.path.join(__dirname, 'base', 'compile'),
         pattern: $.path.join('**', '*.css')
-      // },
-      // stylus: {
-      //   process: $.path.join(__dirname, 'tasks', 'stylus'),
-      //   pattern: $.path.join('**', '*.styl')
+      },
+      stylus: {
+        process: $.path.join(__dirname, 'tasks', 'stylus'),
+        base: $.path.join(__dirname, 'base', 'compile'),
+        pattern: $.path.join('**', '*.styl')
       },
       sass: {
         process: $.path.join(__dirname, 'tasks', 'sass'),
