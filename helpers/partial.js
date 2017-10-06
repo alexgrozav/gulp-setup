@@ -17,6 +17,18 @@ module.exports = ($, task, options) => {
 
 
   /**
+   * Add a new link to the files link graph
+   */
+  helper.link = (filepath, link) => {
+    if(!fs.pathExistsSync(filepath)) return
+
+    helper.graph[filepath] = helper.graph[filepath] || {};
+    helper.graph[filepath].links = helper.graph[filepath].links || [];
+    helper.graph[filepath].links.push(link);
+  }
+
+
+  /**
    * Handle .styl partial changes by recompiling the parent asset whenever
    * the children are modified.
    *
@@ -35,13 +47,13 @@ module.exports = ($, task, options) => {
       let matchDirname = path.dirname(match[2]);
       let matchBasename = matchRelative.split('/').reverse()[0];
 
+      // Link basename.ext, _basename.ext and basename/index.ext to the file
+      // being currently processed
+      //
       options.ext.forEach((ext) => {
-        ['', '_'].forEach((prefix) => {
-          let matchPath = path.resolve(dirname, matchDirname, prefix + matchBasename + '.' + ext);
-          helper.graph[matchPath] = helper.graph[matchPath] || {};
-          helper.graph[matchPath].links = helper.graph[matchPath].links || [];
-          helper.graph[matchPath].links.push(filepath)
-        });
+        helper.link(path.resolve(dirname, matchDirname, matchBasename, 'index.' + ext), filepath);
+        helper.link(path.resolve(dirname, matchDirname, matchBasename + '.' + ext), filepath);
+        helper.link(path.resolve(dirname, matchDirname, '_' + matchBasename + '.' + ext), filepath);
       });
     }
 
