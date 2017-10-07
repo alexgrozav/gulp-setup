@@ -1,7 +1,7 @@
 # The perfect gulp setup
 This project aims to create a modular and configurable gulp setup. Get project automation up and running with minimum involvement.
 
-```sh
+```
 npm install gulp-cli -g
 npm install gulp gulp-load-plugins gulp-setup --save-dev
 ```
