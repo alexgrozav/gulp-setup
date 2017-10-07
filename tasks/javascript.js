@@ -26,7 +26,7 @@ module.exports = ($, gulp, config, task) => {
   /**
    * Compile and bundle individual JS files
    */
-  let compile = require($.path.join(__dirname, '..', 'helpers', 'browserify'));
+  let compile = require($.path.join(__dirname, '..', 'helpers', task.options.bundler))($, task);
 
 
   return {
@@ -35,9 +35,8 @@ module.exports = ($, gulp, config, task) => {
 
     build: $.lazypipe()
       // .pipe($.ignore, partial.check)
-      .pipe($.babel, options.build)
-      .pipe($.through.obj, compile)
-      .pipe($.buffer),
+      .pipe(compile)
+      .pipe($.babel, options.build),
 
     dist: $.lazypipe()
       .pipe($.babel, options.dist)
