@@ -1,9 +1,15 @@
+let getFilter = (step) => task.filter && task.filter[step] ? task.filter[step] : (() => true)
+
+
 module.exports = ($, gulp, config, task) => () =>
   gulp.src($.path.join(config.src, task.pattern))
+    // Filter files that are going through the build pipeline
+    //
+    .pipe($.filter(getFilter('init')))
+
     // Stream task initialization process
     //
     .pipe(task.process.init())
-
 
     // Cache files that have been already processed
     //
@@ -16,6 +22,10 @@ module.exports = ($, gulp, config, task) => () =>
     // Use plumber to catch unhandled exceptions
     //
     .pipe($.plumber())
+
+    // Filter files that are going through the build pipeline
+    //
+    .pipe($.filter(getFilter('build')))
 
     // Run build process and write sourcemaps
     //
@@ -31,6 +41,10 @@ module.exports = ($, gulp, config, task) => () =>
     //
     .pipe($.browserSync.stream())
 
+    // Filter files that are going through the build pipeline
+    //
+    .pipe($.filter(getFilter('dist')))
+
     // Run dist process
     //
     .pipe(task.process.dist())
@@ -38,6 +52,10 @@ module.exports = ($, gulp, config, task) => () =>
     // Process files for distribution
     //
     .pipe($.if(!!config.dist, $.lazypipe().pipe(gulp.dest, config.dist)()))
+
+    // Filter files that are going through the end pipeline
+    //
+    .pipe($.filter(getFilter('end')))
 
     // Stream task ending process
     //
