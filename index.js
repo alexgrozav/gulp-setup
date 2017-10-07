@@ -92,9 +92,14 @@ module.exports = ($, gulp, config) => {
 
   // Create gulp tasks for each task in the configuration
   //
-  // let sequences = [];
   Object.keys(config.tasks).forEach((name) => {
     config.tasks[name].name = name;
     gulp.task(name, loadTask($, gulp, config, config.tasks[name]));
   });
+
+
+  module.exports = {
+    gulp: gulp,
+    plugins: $
+  };
 };
