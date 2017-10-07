@@ -1,4 +1,9 @@
 module.exports = ($, gulp, config, task) => {
+  const partial = require($.path.join(__dirname, '..', 'helpers', 'partial'))($, task, {
+    ext: ['js']
+  });
+
+
   /**
    * Babel options
    */
@@ -25,10 +30,11 @@ module.exports = ($, gulp, config, task) => {
 
 
   return {
-    init: $.lazypipe()
-      .pipe($.ignore, /bundle\.js$/),
+    // init: $.lazypipe()
+    //   .pipe($.tap, partial.process),
 
     build: $.lazypipe()
+      // .pipe($.ignore, partial.check)
       .pipe($.babel, options.build)
       .pipe($.through.obj, compile)
       .pipe($.buffer),
