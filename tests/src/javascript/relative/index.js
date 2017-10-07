@@ -1,1 +1,1 @@
-require('./partial');
+require('./partial.js');
