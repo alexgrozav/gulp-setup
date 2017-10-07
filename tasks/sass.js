@@ -1,6 +1,6 @@
 module.exports = ($, gulp, config, task) => {
   const partial = require($.path.join(__dirname, '..', 'helpers', 'partial'))($, task, {
-    ext: ['sass', 'scss']
+    language: 'sass'
   });
 
 

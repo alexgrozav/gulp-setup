@@ -1,7 +1,7 @@
 module.exports = ($, gulp, config, task) => {
   const poststylus = require('poststylus');
   const partial = require($.path.join(__dirname, '..', 'helpers', 'partial'))($, task, {
-    ext: ['styl']
+    language: 'stylus'
   });
 
 
