@@ -2,6 +2,25 @@ const fs = require('fs-extra');
 const path = require('path');
 
 
+const languages = {
+  pug: {
+    ext: ['pug', 'jade'],
+    partial: /\_[^\\\/]+\.(pug|jade)$/,
+    include: /(include)\s+[\'\"]?([^\'\"\s]+)[\'\"]?/g
+  },
+  sass: {
+    ext: ['scss', 'sass'],
+    partial: /\_[^\\\/]+\.(scss|sass)$/,
+    include: /\@(import)\s+[\'\"]([^\'\"]+)[\'\"]/g
+  },
+  stylus: {
+    ext: ['styl'],
+    partial: /\_[^\\\/]+\.styl$/,
+    include: /\@(import|require)\s+[\'\"]([^\'\"]+)[\'\"]/g
+  }
+};
+
+
 module.exports = ($, task, options) => {
   let helper = {
     graph: {}
@@ -13,7 +32,7 @@ module.exports = ($, task, options) => {
    *
    * @param file Input file received in pipeline
    */
-  helper.check = (file) => (new RegExp(/\_.+\./.source + '(' + options.ext.join('|') + ')' + '$')).test(file.relative);
+  helper.check = (file) => (languages[options.language].partial).test(file.relative);
 
 
   /**
@@ -38,7 +57,7 @@ module.exports = ($, task, options) => {
     let filepath = file.path;
     let dirname = path.dirname(file.path);
     let contents = fs.readFileSync(filepath, 'utf8');
-    let pattern = new RegExp(/@(import|require)\s+[\'\"]([\w\-\\\/]+)/.source + '(.(' + options.ext.join('|') + '))?' + /[\'\"]/.source, 'g');
+    let pattern = languages[options.language].include;
     let match;
 
 
@@ -50,8 +69,9 @@ module.exports = ($, task, options) => {
       // Link basename.ext, _basename.ext and basename/index.ext to the file
       // being currently processed
       //
-      options.ext.forEach((ext) => {
-        helper.link(path.resolve(dirname, matchDirname, matchBasename, 'index.' + ext), filepath);
+      languages[options.language].ext.forEach((ext) => {
+        if (!/\.[^\.]+$/.test(matchRelative))
+          helper.link(path.resolve(dirname, matchDirname, matchBasename, 'index.' + ext), filepath);
         helper.link(path.resolve(dirname, matchDirname, matchBasename + '.' + ext), filepath);
         helper.link(path.resolve(dirname, matchDirname, '_' + matchBasename + '.' + ext), filepath);
       });
