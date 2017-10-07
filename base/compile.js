@@ -1,11 +1,11 @@
-let getFilter = (step) => task.filter && task.filter[step] ? task.filter[step] : (() => true)
+let getFilter = (task, step) => task.filter && task.filter[step] ? task.filter[step] : (() => true)
 
 
 module.exports = ($, gulp, config, task) => () =>
   gulp.src($.path.join(config.src, task.pattern))
     // Filter files that are going through the build pipeline
     //
-    .pipe($.filter(getFilter('init')))
+    .pipe($.filter(getFilter(task, 'init')))
 
     // Stream task initialization process
     //
@@ -25,7 +25,7 @@ module.exports = ($, gulp, config, task) => () =>
 
     // Filter files that are going through the build pipeline
     //
-    .pipe($.filter(getFilter('build')))
+    .pipe($.filter(getFilter(task, 'build')))
 
     // Run build process and write sourcemaps
     //
@@ -43,7 +43,7 @@ module.exports = ($, gulp, config, task) => () =>
 
     // Filter files that are going through the build pipeline
     //
-    .pipe($.filter(getFilter('dist')))
+    .pipe($.filter(getFilter(task, 'dist')))
 
     // Run dist process
     //
@@ -55,7 +55,7 @@ module.exports = ($, gulp, config, task) => () =>
 
     // Filter files that are going through the end pipeline
     //
-    .pipe($.filter(getFilter('end')))
+    .pipe($.filter(getFilter(task, 'end')))
 
     // Stream task ending process
     //
