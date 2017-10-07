@@ -6,6 +6,7 @@ module.exports = ($, gulp, config) => {
   $.lazypipe = require('lazypipe');
   $.runSequence = require('run-sequence');
   $.browserSync = require('browser-sync').create();
+  $.through = require('through2');
 
 
   /*
