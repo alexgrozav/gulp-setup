@@ -7,4 +7,11 @@ require(path.join(__dirname, 'index'))(plugins, gulp, {
   src: path.join(__dirname, 'tests', 'src'),
   build: path.join(__dirname, 'tests', 'build'),
   dist: path.join(__dirname, 'tests', 'dist'),
+  tasks: {
+    javascript: {
+      filter: {
+        dist: ['**/script.js']
+      }
+    }
+  }
 });
