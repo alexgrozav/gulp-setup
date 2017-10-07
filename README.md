@@ -30,7 +30,7 @@ gulp javascript
 
 ## Configuration
 Here's a sample configuration for gulp-setup which provides `clean` and `html` tasks.
-~~~
+```js
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
 const setup = require('gulp-setup')(plugins, gulp, {
@@ -50,7 +50,7 @@ const setup = require('gulp-setup')(plugins, gulp, {
     }
   }
 });
-~~~
+```
 
 ## Writing a task
 The tasks present in gulp-setup are made out of two components: `process` and `base`. All other parameters, such as `pattern`, are made available in these components.
