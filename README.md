@@ -1,22 +1,22 @@
 # The perfect gulp setup
 This project aims to create a modular and configurable gulp setup. Get project automation up and running with minimum involvement.
 
-~~~
+```
 npm install gulp-cli -g
 npm install gulp gulp-load-plugins gulp-setup --save-dev
-~~~
+```
 
 ## Sample `gulpfile.js`
 Setting up gulp using gulp-setup is simpler than ever.
-~~~
+```js
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
 const setup = require('gulp-setup')(plugins, gulp);
-~~~
+```
 
 ### Default Tasks
 By default, gulp-setup comes bundled with a variety of pre-made tasks.
-~~~
+```
 gulp
 gulp build
 gulp clean
@@ -25,7 +25,7 @@ gulp css
 gulp sass
 gulp stylus
 gulp javascript
-~~~
+```
 
 
 ## Configuration
@@ -58,7 +58,7 @@ The tasks present in gulp-setup are made out of two components: `process` and `b
 - The __base__ task
 The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, `dist` and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
 
-~~~
+```js
 module.exports = ($, gulp, config, task) => () =>
   gulp.src($.path.join(config.src, task.pattern))
     .pipe(task.process.init())
@@ -68,28 +68,28 @@ module.exports = ($, gulp, config, task) => () =>
     .pipe(task.process.dist())
     .pipe(gulp.dest(config.dist))
     .pipe(task.process.end());
-~~~
+```
 
 - The __process__ task
 The process task is the main processing that the task is concerned with. It can either be a standalone gulp task, or if combined with a `base` task, it will provide the base hooks for the `base` template.
 
 __Template__
-~~~
+```js
 module.exports = ($, gulp, config, task) => ({
   build: $.lazypipe()
     .pipe($.autoprefixer),
   dist: $.lazypipe()
     .pipe($.cssmin)
 });
-~~~
+```
 
 __Standalone__
-~~~
+```js
 module.exports = ($, gulp, config, task) => {
   return () => gulp.src([config.build, config.dist])
     .pipe($.clean());
 }
-~~~
+```
 
 
 ## Contributions, bugs and feature requests
