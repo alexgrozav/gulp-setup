@@ -45,7 +45,10 @@ module.exports = ($, gulp, config) => {
       pug: {
         process: $.path.join(__dirname, 'tasks', 'pug'),
         base: $.path.join(__dirname, 'base', 'compile'),
-        pattern: $.path.join('**', '*.pug')
+        pattern: $.path.join('**', '*.pug'),
+        options: {
+          locals: {}
+        }
       },
       javascript: {
         process: $.path.join(__dirname, 'tasks', 'javascript'),
