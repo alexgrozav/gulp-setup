@@ -6,19 +6,22 @@ module.exports = ($, gulp, config) => {
   $.lazypipe = require('lazypipe');
   $.runSequence = require('run-sequence');
   $.browserSync = require('browser-sync').create();
+  $.webpack = require('webpack-stream');
   $.through = require('through2');
+  $.named = require('vinyl-named');
 
 
   /*
    * Helpers
    */
+  const options = require('merge-options');
   const loadTask = require($.path.join(__dirname, 'helpers', 'task-loader'));
 
 
   /**
    * Gulp configuration for individual tasks
    */
-  config = Object.assign({
+  config = options({
     src: $.path.join(__dirname, 'src'),
     build: $.path.join(__dirname, 'build'),
     dist: $.path.join(__dirname, 'dist'),
@@ -29,14 +32,7 @@ module.exports = ($, gulp, config) => {
         process: () => $.runSequence('build')
       },
       build: {
-        process: () => {
-          let tasks = [];
-          Object.keys(config.tasks).forEach((name) => {
-            if (config.tasks[name].pattern) tasks.push(name);
-          });
-
-          return $.runSequence('clean', tasks);
-        }
+        process: $.path.join(__dirname, 'tasks', 'build')
       },
       clean: {
         process: $.path.join(__dirname, 'tasks', 'clean')
@@ -45,15 +41,21 @@ module.exports = ($, gulp, config) => {
         process: $.path.join(__dirname, 'tasks', 'html'),
         base: $.path.join(__dirname, 'base', 'compile'),
         pattern: $.path.join('**', '*.html')
-      // },
-      // pug: {
-      //   process: $.path.join(__dirname, 'tasks', 'pug'),
-      //   pattern: $.path.join('**', '*.pug')
+      },
+      pug: {
+        process: $.path.join(__dirname, 'tasks', 'pug'),
+        base: $.path.join(__dirname, 'base', 'compile'),
+        pattern: $.path.join('**', '*.pug')
       },
       javascript: {
         process: $.path.join(__dirname, 'tasks', 'javascript'),
         base: $.path.join(__dirname, 'base', 'compile'),
-        pattern: $.path.join('**', '*.js')
+        pattern: $.path.join('**', '*.js'),
+        options: {
+          bundler: 'webpack',
+          browserify: require($.path.join(__dirname, 'config', 'browserify')),
+          webpack: require($.path.join(__dirname, 'config', 'webpack'))
+        }
       // },
       // coffeescript: {
       //   process: $.path.join(__dirname, 'tasks', 'coffeescript'),
