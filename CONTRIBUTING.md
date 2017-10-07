@@ -1,6 +1,6 @@
-# Contributing to Inkline
+# Contributing to gulp-setup
 
-Looking to contribute something to Inkline? **Here's how you can do it.**
+Looking to contribute something to gulp-setup? **Here's how you can do it.**
 
 Please review this document in order to make the contribution
 process easy and effective for everyone involved.
@@ -13,13 +13,10 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/inkline/inkline/issues) is
+The [issue tracker](https://github.com/alexgrozav/gulp-setup/issues) is
 the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests)
 and [submitting pull requests](#pull-requests), but please respect the following
 restrictions:
-
-<!-- * Please **do not** use the issue tracker for personal support requests.  Stack
-  Overflow ([`inkline`](https://stackoverflow.com/questions/tagged/inkline) tag), [Inkline](https://inkline-slack.herokuapp.com/) or [IRC](README.md#community) are better places to get help. -->
 
 * Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others.
@@ -44,7 +41,7 @@ The bug tracker utilizes several labels to help organize and identify issues. He
 - `css` - Issues stemming from the compiled CSS or source Stylus files.
 - `js` - Issues stemming from the compiled JS or source TypeScript files.
 
-For a complete look at the labels, see the [project labels page](https://github.com/inkline/inkline/labels).
+For a complete look at the labels, see the [project labels page](https://github.com/alexgrozav/gulp-setup/labels).
 
 
 ## Bug reports
@@ -55,7 +52,7 @@ Good bug reports are extremely helpful!
 Guidelines for bug reports:
 
 0. **Validate and lint your code** &mdash; [validate your HTML](https://html5.validator.nu)
-   and [lint your HTML](https://github.com/twbs/bootlint) to ensure your
+   and lint your HTML to ensure your
    problem isn't caused by a simple error in your own code.
 
 1. **Use the GitHub issue search** &mdash; check if the issue has already been
@@ -118,17 +115,6 @@ Please adhere to the coding guidelines used throughout the
 project (indentation, accurate comments, etc.) and any other requirements
 (such as test coverage).
 
-**Do not edit `inkline.css`, or `inkline.js`
-directly!** Those files are automatically generated. You should edit the
-source files in [`/inkline/src/`](https://github.com/inkline/inkline/tree/master/src)
-instead.
-
-Similarly, when contributing to Bootstrap's documentation, you should edit the
-documentation source files in
-[the `/inkline/docs/` directory of the `master` branch](https://github.com/inkline/inkline/tree/master/docs).
-**Do not edit the `gh-pages` branch.** That branch is generated from the
-documentation source files and is managed separately by the Inkline Core Team.
-
 Adhering to the following process is the best way to get your work
 included in the project:
 
@@ -137,11 +123,11 @@ included in the project:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/inkline.git
+   git clone https://github.com/<your-username>/gulp-setup.git
    # Navigate to the newly cloned directory
-   cd bootstrap
+   cd gulp-setup
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/inkline/inkline.git
+   git remote add upstream https://github.com/alexgrozav/gulp-setup.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
