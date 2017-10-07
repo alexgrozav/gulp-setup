@@ -55,7 +55,7 @@ const setup = require('gulp-setup')(plugins, gulp, {
 ## Writing a task
 The tasks present in gulp-setup are made out of two components: `process` and `base`. All other parameters, such as `pattern`, are made available in these components.
 
-- The __base__ task
+#### The __base__ task
 The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, `dist` and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
 
 ```js
@@ -70,7 +70,7 @@ module.exports = ($, gulp, config, task) => () =>
     .pipe(task.process.end());
 ```
 
-- The __process__ task
+#### The __process__ task
 The process task is the main processing that the task is concerned with. It can either be a standalone gulp task, or if combined with a `base` task, it will provide the base hooks for the `base` template.
 
 __Template__
