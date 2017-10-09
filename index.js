@@ -39,12 +39,12 @@ module.exports = ($, gulp, config) => {
       },
       html: {
         process: $.path.join(__dirname, 'tasks', 'html'),
-        base: $.path.join(__dirname, 'base', 'compile'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.html')
       },
       pug: {
         process: $.path.join(__dirname, 'tasks', 'pug'),
-        base: $.path.join(__dirname, 'base', 'compile'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.pug'),
         options: {
           locals: {}
@@ -52,7 +52,7 @@ module.exports = ($, gulp, config) => {
       },
       javascript: {
         process: $.path.join(__dirname, 'tasks', 'javascript'),
-        base: $.path.join(__dirname, 'base', 'compile'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.js'),
         options: {
           bundler: 'webpack',
@@ -70,17 +70,17 @@ module.exports = ($, gulp, config) => {
       },
       css: {
         process: $.path.join(__dirname, 'tasks', 'css'),
-        base: $.path.join(__dirname, 'base', 'compile'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.css')
       },
       stylus: {
         process: $.path.join(__dirname, 'tasks', 'stylus'),
-        base: $.path.join(__dirname, 'base', 'compile'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.styl')
       },
       sass: {
         process: $.path.join(__dirname, 'tasks', 'sass'),
-        base: $.path.join(__dirname, 'base', 'compile'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{sass,scss}')
       // },
       // image: {
