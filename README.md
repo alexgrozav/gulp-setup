@@ -41,11 +41,11 @@ const setup = require('gulp-setup')(plugins, gulp, {
   debug: true,
   tasks: {
     clean: {
-      process: 'gulp-setup/tasks/clean',
+      process: './tasks/clean',
     },
     html: {
-      process: 'gulp-setup/tasks/html',
-      base: 'gulp-setup/base/compile',
+      process: './tasks/html',
+      base: './base/base.js',
       pattern: '**/*.html'
     }
   }
@@ -59,6 +59,8 @@ The tasks present in gulp-setup are made out of two components: `process` and `b
 The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, `dist` and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
 
 ```js
+// base/base.js
+
 module.exports = ($, gulp, config, task) => () =>
   gulp.src($.path.join(config.src, task.pattern))
     .pipe(task.process.init())
@@ -75,6 +77,8 @@ The process task is the main processing that the task is concerned with. It can 
 
 __Template__
 ```js
+// tasks/css.js
+
 module.exports = ($, gulp, config, task) => ({
   build: $.lazypipe()
     .pipe($.autoprefixer),
@@ -85,6 +89,8 @@ module.exports = ($, gulp, config, task) => ({
 
 __Standalone__
 ```js
+// tasks/clean.js
+
 module.exports = ($, gulp, config, task) => {
   return () => gulp.src([config.build, config.dist])
     .pipe($.clean());
