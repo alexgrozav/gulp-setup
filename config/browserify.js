@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   coffeeify: {
-    plugin: require('coffeeify')
+    transform: require('coffeeify')
   },
   tsify: {
     plugin: require('tsify'),
