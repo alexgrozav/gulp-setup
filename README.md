@@ -31,7 +31,7 @@ gulp typescript
 
 
 ## Configuration
-Here's a sample configuration for gulp-setup which provides `clean` and `html` tasks.
+Here's a sample configuration for gulp-setup that defines a custom task called `mytask` and overrides the options for the existing default `javascript` task.
 ```js
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
@@ -42,13 +42,18 @@ const setup = require('gulp-setup')(plugins, gulp, {
   cache: true,
   debug: true,
   tasks: {
-    clean: {
-      process: './tasks/clean',
+    mytask: {
+      process: './tasks/mytask',
+      base: './bases/base',
+      pattern: '**/*.css'
     },
-    html: {
-      process: './tasks/html',
-      base: './bases/base.js',
-      pattern: '**/*.html'
+    myclean: {
+      process: './tasks/myclean'
+    },
+    javascript: {
+      options: {
+        bundler: 'webpack'
+      }
     }
   }
 });
@@ -79,7 +84,7 @@ The process task is the main processing that the task is concerned with. It can 
 
 __Template__
 ```js
-// tasks/css.js
+// tasks/mytask.js
 
 module.exports = ($, gulp, config, task) => ({
   build: $.lazypipe()
@@ -91,7 +96,7 @@ module.exports = ($, gulp, config, task) => ({
 
 __Standalone__
 ```js
-// tasks/clean.js
+// tasks/myclean.js
 
 module.exports = ($, gulp, config, task) => {
   return () => gulp.src([config.build, config.dist])
