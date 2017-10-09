@@ -88,10 +88,10 @@ module.exports = ($, gulp, config) => {
       // image: {
       //   process: $.path.join(__dirname, 'tasks', 'image'),
       //   pattern: $.path.join('**', '*.{svg,jpg,png,gif}')
-      // },
-      // font: {
-      //   process: $.path.join(__dirname, 'tasks', 'font'),
-      //   pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
+      },
+      font: {
+        process: $.path.join(__dirname, 'tasks', 'font'),
+        pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
       }
     }
   }, config || {});
