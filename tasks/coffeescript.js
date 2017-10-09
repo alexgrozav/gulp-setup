@@ -7,20 +7,7 @@ module.exports = ($, gulp, config, task) => {
   /**
    * Babel options
    */
-  let options = {
-    build: {
-      presets: [
-        ['env', {
-          'targets': {
-            'browsers': 'ie >= 8'
-          }
-        }]
-      ]
-    },
-    dist: {
-      presets: ['babili']
-    }
-  };
+  let options = require($.path.join(__dirname, '..', 'config', 'babel'));
 
 
   /**
