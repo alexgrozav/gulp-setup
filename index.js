@@ -64,10 +64,11 @@ module.exports = ($, gulp, config) => {
         process: $.path.join(__dirname, 'tasks', 'coffeescript'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.coffee')
-      // },
-      // typescript: {
-      //   process: $.path.join(__dirname, 'tasks', 'typescript'),
-      //   pattern: $.path.join('**', '*.ts')
+      },
+      typescript: {
+        process: $.path.join(__dirname, 'tasks', 'typescript'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
+        pattern: $.path.join('**', '*.ts')
       },
       css: {
         process: $.path.join(__dirname, 'tasks', 'css'),
