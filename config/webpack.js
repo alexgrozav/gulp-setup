@@ -50,6 +50,15 @@ module.exports = {
         ]
       },
 
+      // CoffeeScript
+      {
+        test: /\.coffee(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'coffee-loader' }
+        ]
+      },
+
       // Stylus
       {
         test: /\.styl$/,
