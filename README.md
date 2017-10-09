@@ -59,17 +59,17 @@ The tasks present in gulp-setup are made out of two components: `process` and `b
 The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, `dist` and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
 
 ```js
-// base/base.js
+// bases/base.js
 
 module.exports = ($, gulp, config, task) => () =>
   gulp.src($.path.join(config.src, task.pattern))
-    .pipe(task.process.init())
+    .pipe(task.process.init())     // Initialization hook
     .pipe($.debug())
-    .pipe(task.process.build())
-    .pipe(gulp.dest(config.build))
-    .pipe(task.process.dist())
+    .pipe(task.process.build())    // Building hook
+    .pipe(gulp.dest(config.build)) 
+    .pipe(task.process.dist())     // Distribution hook
     .pipe(gulp.dest(config.dist))
-    .pipe(task.process.end());
+    .pipe(task.process.end());     // Ending hook
 ```
 
 ### The __process__ task
