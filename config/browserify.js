@@ -1,1 +1,5 @@
-module.exports = {};
+module.exports = {
+  coffeeify: {
+    transform: require('coffeeify')
+  }
+};
