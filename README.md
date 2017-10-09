@@ -31,7 +31,7 @@ gulp typescript
 
 
 ## Configuration
-Here's a sample configuration for gulp-setup that defines a custom task called `mytask` and overrides the options for the existing default `javascript` task.
+Here's a sample configuration for gulp-setup that defines a custom task called `mytask` and overrides the options for the existing default `javascript` task. The `tasks` object key defines the name of the gulp task.
 ```js
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
