@@ -1,6 +1,6 @@
 class Human
-  speak: =>
-    console.log("Hello world!")
+  (name) ->
+    @name = name
 
 
 module.exports = Human
