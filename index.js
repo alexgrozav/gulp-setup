@@ -59,10 +59,11 @@ module.exports = ($, gulp, config) => {
           browserify: require($.path.join(__dirname, 'config', 'browserify')),
           webpack: require($.path.join(__dirname, 'config', 'webpack'))
         }
-      // },
-      // coffeescript: {
-      //   process: $.path.join(__dirname, 'tasks', 'coffeescript'),
-      //   pattern: $.path.join('**', '*.coffee')
+      },
+      coffeescript: {
+        process: $.path.join(__dirname, 'tasks', 'coffeescript'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
+        pattern: $.path.join('**', '*.coffee')
       // },
       // typescript: {
       //   process: $.path.join(__dirname, 'tasks', 'typescript'),
