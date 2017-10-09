@@ -91,6 +91,7 @@ module.exports = ($, gulp, config) => {
       },
       fonts: {
         process: $.path.join(__dirname, 'tasks', 'fonts'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
       }
     }
