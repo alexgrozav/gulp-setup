@@ -25,6 +25,8 @@ gulp css
 gulp sass
 gulp stylus
 gulp javascript
+gulp coffeescript
+gulp typescript
 ```
 
 
