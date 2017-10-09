@@ -85,12 +85,12 @@ module.exports = ($, gulp, config) => {
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{sass,scss}')
       // },
-      // image: {
+      // images: {
       //   process: $.path.join(__dirname, 'tasks', 'image'),
       //   pattern: $.path.join('**', '*.{svg,jpg,png,gif}')
       },
-      font: {
-        process: $.path.join(__dirname, 'tasks', 'font'),
+      fonts: {
+        process: $.path.join(__dirname, 'tasks', 'fonts'),
         pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
       }
     }
