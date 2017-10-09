@@ -45,7 +45,7 @@ const setup = require('gulp-setup')(plugins, gulp, {
     },
     html: {
       process: './tasks/html',
-      base: './base/base.js',
+      base: './bases/base.js',
       pattern: '**/*.html'
     }
   }
