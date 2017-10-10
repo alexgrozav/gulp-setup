@@ -28,21 +28,33 @@ module.exports = ($, gulp, config) => {
     cache: true,
     debug: true,
     tasks: {
-      default: {
-        process: () => $.runSequence('build')
+      'default': {
+        process: () => $.runSequence('browser-sync', 'build')
       },
-      build: {
+      'build': {
         process: $.path.join(__dirname, 'tasks', 'build')
       },
-      clean: {
+      'clean': {
         process: $.path.join(__dirname, 'tasks', 'clean')
       },
-      html: {
+      'watch': {
+        process: $.path.join(__dirname, 'tasks', 'watch')
+      },
+      'browser-sync': {
+        process: $.path.join(__dirname, 'tasks', 'browser-sync'),
+        options: {
+          port: 3000,
+          proxy: 'localhost:3030',
+          injectChanges: true,
+          reloadDebounce: 1500
+        }
+      },
+      'html': {
         process: $.path.join(__dirname, 'tasks', 'html'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.html')
       },
-      pug: {
+      'pug': {
         process: $.path.join(__dirname, 'tasks', 'pug'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.pug'),
@@ -50,7 +62,30 @@ module.exports = ($, gulp, config) => {
           locals: {}
         }
       },
-      javascript: {
+      'css': {
+        process: $.path.join(__dirname, 'tasks', 'css'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
+        pattern: $.path.join('**', '*.css')
+      },
+      'css-lint': {
+        process: $.path.join(__dirname, 'tasks', 'css-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.css'),
+        options: {
+          exclude: /vendors\//
+        }
+      },
+      'stylus': {
+        process: $.path.join(__dirname, 'tasks', 'stylus'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
+        pattern: $.path.join('**', '*.styl')
+      },
+      'sass': {
+        process: $.path.join(__dirname, 'tasks', 'sass'),
+        base: $.path.join(__dirname, 'bases', 'compile'),
+        pattern: $.path.join('**', '*.{sass,scss}')
+      },
+      'javascript': {
         process: $.path.join(__dirname, 'tasks', 'javascript'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.js'),
@@ -60,37 +95,49 @@ module.exports = ($, gulp, config) => {
           webpack: require($.path.join(__dirname, 'config', 'webpack'))
         }
       },
-      coffeescript: {
+      'javascript-lint': {
+        process: $.path.join(__dirname, 'tasks', 'javascript-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.js'),
+        options: {
+          rules: require($.path.join(__dirname, 'config', 'eslint.json')),
+          exclude: /vendors\//
+        }
+      },
+      'coffeescript': {
         process: $.path.join(__dirname, 'tasks', 'coffeescript'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.coffee')
       },
-      typescript: {
+      'coffeescript-lint': {
+        process: $.path.join(__dirname, 'tasks', 'coffeescript-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.coffee'),
+        options: {
+          rules: require($.path.join(__dirname, 'config', 'coffeelint.json')),
+          exclude: /vendors\//
+        }
+      },
+      'typescript': {
         process: $.path.join(__dirname, 'tasks', 'typescript'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.ts')
       },
-      css: {
-        process: $.path.join(__dirname, 'tasks', 'css'),
-        base: $.path.join(__dirname, 'bases', 'compile'),
-        pattern: $.path.join('**', '*.css')
+      'typescript-lint': {
+        process: $.path.join(__dirname, 'tasks', 'typescript-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.ts'),
+        options: {
+          rules: $.path.join(__dirname, 'config', 'tslint.json'),
+          exclude: /vendors\//
+        }
       },
-      stylus: {
-        process: $.path.join(__dirname, 'tasks', 'stylus'),
-        base: $.path.join(__dirname, 'bases', 'compile'),
-        pattern: $.path.join('**', '*.styl')
-      },
-      sass: {
-        process: $.path.join(__dirname, 'tasks', 'sass'),
-        base: $.path.join(__dirname, 'bases', 'compile'),
-        pattern: $.path.join('**', '*.{sass,scss}')
-      },
-      images: {
+      'images': {
         process: $.path.join(__dirname, 'tasks', 'images'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{svg,jpg,png,gif}')
       },
-      fonts: {
+      'fonts': {
         process: $.path.join(__dirname, 'tasks', 'fonts'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
