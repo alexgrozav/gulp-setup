@@ -40,15 +40,6 @@ module.exports = ($, gulp, config) => {
       'watch': {
         process: $.path.join(__dirname, 'tasks', 'watch')
       },
-      'browser-sync': {
-        process: $.path.join(__dirname, 'tasks', 'browser-sync'),
-        options: {
-          port: 3000,
-          proxy: 'localhost:3030',
-          injectChanges: true,
-          reloadDebounce: 1500
-        }
-      },
       'html': {
         process: $.path.join(__dirname, 'tasks', 'html'),
         base: $.path.join(__dirname, 'bases', 'compile'),
@@ -96,10 +87,27 @@ module.exports = ($, gulp, config) => {
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.styl')
       },
+      'stylus-lint': {
+        process: $.path.join(__dirname, 'tasks', 'stylus-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.styl'),
+        options: {
+          rules: $.path.join(__dirname, 'config', 'stylint.json'),
+          exclude: /vendors\//
+        }
+      },
       'sass': {
         process: $.path.join(__dirname, 'tasks', 'sass'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{sass,scss}')
+      },
+      'sass-lint': {
+        process: $.path.join(__dirname, 'tasks', 'sass-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.{sass,scss}'),
+        options: {
+          exclude: /vendors\//
+        }
       },
       'javascript': {
         process: $.path.join(__dirname, 'tasks', 'javascript'),
@@ -157,6 +165,15 @@ module.exports = ($, gulp, config) => {
         process: $.path.join(__dirname, 'tasks', 'fonts'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.{eot,svg,ttf,woff,woff2}')
+      },
+      'browser-sync': {
+        process: $.path.join(__dirname, 'tasks', 'browser-sync'),
+        options: {
+          port: 3000,
+          proxy: 'localhost:3030',
+          injectChanges: true,
+          reloadDebounce: 1500
+        }
       }
     }
   }, config || {});
