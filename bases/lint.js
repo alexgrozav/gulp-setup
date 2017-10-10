@@ -5,7 +5,7 @@ module.exports = ($, gulp, config, task) => () =>
   gulp.src(task.src || $.path.join(config.src, task.pattern))
     // Filter files that are going through the pipeline
     //
-    .pipe($.ignore.exclude(task.options.exclude)))
+    .pipe($.ignore.exclude(task.options.exclude))
 
     // Stream task initialization process
     //
