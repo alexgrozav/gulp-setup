@@ -34,6 +34,9 @@ module.exports = ($, gulp, config) => {
       'build': {
         process: $.path.join(__dirname, 'tasks', 'build')
       },
+      'lint': {
+        process: $.path.join(__dirname, 'tasks', 'lint')
+      },
       'clean': {
         process: $.path.join(__dirname, 'tasks', 'clean')
       },
