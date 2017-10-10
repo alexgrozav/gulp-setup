@@ -1,16 +1,18 @@
-@import "partial";
-@import "relative/partial";
+@import 'partial';
+@import 'relative/partial';
+
 
 body {
+  background: #fff;
   color: #333;
-  background: white;
   font-size: 1rem;
 
   a {
-    color: blue;
+    color: #00f;
     text-decoration: underline;
+
     &:hover {
-      color: red;
+      color: #f00;
     }
   }
 }
