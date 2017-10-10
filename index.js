@@ -53,6 +53,7 @@ module.exports = ($, gulp, config) => {
         base: $.path.join(__dirname, 'bases', 'lint'),
         pattern: $.path.join('**', '*.html'),
         options: {
+          rules: $.path.join(__dirname, 'config', 'htmllint.json'),
           exclude: /vendors\//
         }
       },
@@ -109,6 +110,7 @@ module.exports = ($, gulp, config) => {
         base: $.path.join(__dirname, 'bases', 'lint'),
         pattern: $.path.join('**', '*.{sass,scss}'),
         options: {
+          rules: require($.path.join(__dirname, 'config', 'sasslint.json')),
           exclude: /vendors\//
         }
       },
