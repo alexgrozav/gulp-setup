@@ -1,12 +1,10 @@
 {
   "name": "gulp-setup",
-  "version": "1.0.1",
-  "description": "A boilerplate for flawless gulp workflow and bundling with webpack.",
+  "version": "2.0.0",
+  "description": "The perfect gulp setup. Get fast and hassle-free web development project automation.",
   "main": "index.js",
   "dependencies": {
-    "gulp": "^3.9.1"
-  },
-  "devDependencies": {
+    "gulp": "^3.9.1",
     "autoprefixer": "^7.1.4",
     "babel-core": "^6.26.0",
     "babel-preset-babili": "^0.1.4",
@@ -37,7 +35,6 @@
     "gulp-pug": "^3.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
-    "gulp-steal": "github:BigAB/gulp-steal",
     "gulp-string-replace": "^0.4.0",
     "gulp-stylus": "^2.6.0",
     "gulp-tap": "^1.0.1",
@@ -68,17 +65,32 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexgrozav/gulp-webpack.git"
+    "url": "git+https://github.com/alexgrozav/gulp-setup.git"
   },
   "keywords": [
     "gulp",
-    "webpack",
-    "boilerplate"
+    "setup",
+    "plugin",
+    "modular",
+    "configurable",
+    "build",
+    "clean",
+    "html",
+    "css",
+    "stylus",
+    "sass",
+    "javascript",
+    "coffeescript",
+    "typescript",
+    "images",
+    "fonts",
+    "browserify",
+    "webpack"
   ],
   "author": "Alex Grozav (http://grozav.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alexgrozav/gulp-webpack/issues"
+    "url": "https://github.com/alexgrozav/gulp-setup/issues"
   },
-  "homepage": "https://github.com/alexgrozav/gulp-webpack#readme"
+  "homepage": "https://github.com/alexgrozav/gulp-setup#readme"
 }
