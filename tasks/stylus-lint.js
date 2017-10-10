@@ -3,5 +3,5 @@ module.exports = ($, gulp, config, task) => ({
     .pipe($.stylint, {
       config: task.options.rules
     })
-    .pipe($.stylint.reporter);
+    .pipe($.stylint.reporter)
 });
