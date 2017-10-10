@@ -54,12 +54,28 @@ module.exports = ($, gulp, config) => {
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.html')
       },
+      'html-lint': {
+        process: $.path.join(__dirname, 'tasks', 'html-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.html'),
+        options: {
+          exclude: /vendors\//
+        }
+      },
       'pug': {
         process: $.path.join(__dirname, 'tasks', 'pug'),
         base: $.path.join(__dirname, 'bases', 'compile'),
         pattern: $.path.join('**', '*.pug'),
         options: {
           locals: {}
+        }
+      },
+      'pug-lint': {
+        process: $.path.join(__dirname, 'tasks', 'pug-lint'),
+        base: $.path.join(__dirname, 'bases', 'lint'),
+        pattern: $.path.join('**', '*.pug'),
+        options: {
+          exclude: /vendors\//
         }
       },
       'css': {
