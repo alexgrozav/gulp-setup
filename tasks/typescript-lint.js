@@ -4,5 +4,5 @@ module.exports = ($, gulp, config, task) => ({
       configuration: task.options.rules,
       formatter: 'verbose'
     })
-    .pipe($.tslint.report);
+    .pipe($.tslint.report)
 });
