@@ -10,8 +10,8 @@ npm install gulp gulp-load-plugins gulp-setup --save-dev
 Setting up gulp using gulp-setup is simpler than ever.
 ```js
 const gulp = require('gulp');
-const plugins = require('gulp-load-plugins')();
-const setup = require('gulp-setup')(plugins, gulp);
+const $ = require('gulp-load-plugins')();
+const setup = require('gulp-setup')($, gulp);
 ```
 
 ### Default Tasks
@@ -49,8 +49,8 @@ The `tasks` object key defines the name of the gulp task.
 
 ```js
 const gulp = require('gulp');
-const plugins = require('gulp-load-plugins')();
-const setup = require('gulp-setup')(plugins, gulp, {
+const $ = require('gulp-load-plugins')();
+const setup = require('gulp-setup')($, gulp, {
   src: 'path/to/src',
   build: 'path/to/build',
   dist: 'path/to/dist',
