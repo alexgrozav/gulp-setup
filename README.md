@@ -119,9 +119,11 @@ const packages = require('gulp-setup/package.json');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')({ config: packages });
 const setup = require('gulp-setup')($, gulp, {
-  src: 'path/to/src',
-  build: 'path/to/build',
-  dist: 'path/to/dist',
+  paths: {
+    src: 'path/to/src',
+    build: 'path/to/build',
+    dist: 'path/to/dist'
+  },
   cache: true,
   debug: true,
   tasks: {
@@ -152,13 +154,13 @@ The `base` task serves as a template for other tasks. It makes four pipeline hoo
 // bases/base.js
 
 module.exports = ($, gulp, config, task) => () =>
-  gulp.src($.path.join(config.src, task.pattern))
+  gulp.src($.path.join(config.paths.src, task.pattern))
     .pipe(task.process.init())     // Initialization hook
     .pipe($.debug())
     .pipe(task.process.build())    // Building hook
-    .pipe(gulp.dest(config.build))
+    .pipe(gulp.dest(config.paths.build))
     .pipe(task.process.dist())     // Distribution hook
-    .pipe(gulp.dest(config.dist))
+    .pipe(gulp.dest(config.paths.dist))
     .pipe(task.process.end());     // Ending hook
 ```
 
@@ -184,7 +186,7 @@ __Standalone__
 // tasks/myclean.js
 
 module.exports = ($, gulp, config, task) => {
-  return () => gulp.src([config.build, config.dist])
+  return () => gulp.src([config.paths.build, config.paths.dist])
     .pipe($.clean());
 }
 ```

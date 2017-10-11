@@ -22,9 +22,11 @@ module.exports = ($, gulp, config) => {
    * Gulp configuration for individual tasks
    */
   config = options({
-    src: $.path.join(__dirname, 'src'),
-    build: $.path.join(__dirname, 'build'),
-    dist: $.path.join(__dirname, 'dist'),
+    paths: {
+      src: $.path.join(__dirname, 'src'),
+      build: $.path.join(__dirname, 'build'),
+      dist: $.path.join(__dirname, 'dist')
+    },
     cache: true,
     debug: true,
     tasks: {
@@ -192,6 +194,7 @@ module.exports = ($, gulp, config) => {
 
     config.tasks[name].name = name;
     config.tasks[name].dependencies = config.tasks[name].dependencies || [];
+    config.tasks[name].paths = options(config.paths, config.tasks[name].paths);
 
     gulp.task(name, config.tasks[name].dependencies, loadTask($, gulp, config, config.tasks[name]));
   });

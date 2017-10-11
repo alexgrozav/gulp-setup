@@ -2,7 +2,7 @@ let getFilter = (task, step) => task.filter && task.filter[step] ? task.filter[s
 
 
 module.exports = ($, gulp, config, task) => () =>
-  gulp.src(task.src || $.path.join(config.src, task.pattern))
+  gulp.src(task.paths.src || $.path.join(config.paths.src, task.pattern))
     // Filter files that are going through the pipeline
     //
     .pipe($.ignore.exclude(task.options.exclude))

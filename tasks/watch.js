@@ -3,7 +3,7 @@ module.exports = ($, gulp, config, task) => () => {
     let pattern = config.tasks[name].pattern;
 
     if(pattern && config.tasks[name].watch !== false) {
-      gulp.watch($.path.join(config.src, pattern), [name]);
+      gulp.watch($.path.join(config.paths.src, pattern), [name]);
     }
   });
 }
