@@ -84,15 +84,7 @@ Compiles and autoprefixes `.styl` files and outputs them to the `build` folder, 
 
 __gulp javascript__
 
-Compiles ES6 `.js` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. The `javascript` task can use either `webpack` or `browserify` to process and bundle the files.
-
-```
-javascript: {
-  options: {
-    bundler: 'webpack'
-  }
-}
-```
+Compiles ES6 `.js` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. The `javascript` task can use either `webpack` or `browserify` to process and bundle the files, specified using the `options.bundler` parameter (as seen in the configuration example below).
 
 <sub>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</sub>
 
