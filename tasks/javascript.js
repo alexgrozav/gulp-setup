@@ -11,6 +11,12 @@ module.exports = ($, gulp, config, task) => {
 
 
   /**
+   * Set the same task options as for javascript if the task is being reused
+   */
+  task.options = task.options || config.tasks.javascript.options;
+
+
+  /**
    * Compile and bundle individual JS files
    */
   let compile = require($.path.join(__dirname, '..', 'helpers', task.options.bundler))($, task);
