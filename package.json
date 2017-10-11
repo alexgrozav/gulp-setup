@@ -1,6 +1,6 @@
 {
   "name": "gulp-setup",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "The perfect gulp setup. Get fast and hassle-free front-end automation.",
   "main": "index.js",
   "dependencies": {
@@ -53,6 +53,7 @@
     "lazypipe": "^1.0.1",
     "merge-options": "^1.0.0",
     "poststylus": "^1.0.0",
+    "pug": "^2.0.0-rc.4",
     "pug-html-loader": "^1.1.5",
     "rucksack-css": "^1.0.2",
     "run-sequence": "^2.2.0",
