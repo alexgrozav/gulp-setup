@@ -52,7 +52,7 @@ By default, the build task will execute the `clean` task, after which it runs al
 
 __gulp clean__
 
-This task will remove the existing `build` and `dist` folders.
+This task will remove the existing build and dist folders.
 
 __gulp watch__
 
@@ -64,49 +64,49 @@ This task will run any task that ends with `-lint`.
 
 __gulp html__
 
-Copies `.html` files to the `build` folder, then minifies them and outputs them in `dist`.
+Copies `.html` files to the build folder, then minifies them and outputs them in dist.
 
 __gulp css__
 
-Autoprefixes `.css` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`.
+Autoprefixes `.css` files and outputs them to the build folder, then minifies them and outputs them in dist.
 
 __gulp sass__
 
-Compiles and autoprefixes `.sass` and `.scss` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`.
+Compiles and autoprefixes `.sass` and `.scss` files and outputs them to the build folder, then minifies them and outputs them in dist.
 
 <sub>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</sub>
 
 __gulp stylus__
 
-Compiles and autoprefixes `.styl` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. Stylus instance also provides `rucksack-css` functionality.
+Compiles and autoprefixes `.styl` files and outputs them to the build folder, then minifies them and outputs them in dist. Stylus instance also provides `rucksack-css` functionality.
 
 <sub>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</sub>
 
 __gulp javascript__
 
-Compiles ES6 `.js` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. The `javascript` task can use either `webpack` or `browserify` to process and bundle the files, specified using the `options.bundler` parameter (as seen in the configuration example below).
+Compiles ES6 `.js` files and outputs them to the build folder, then minifies them and outputs them in dist. The `javascript` task can use either `webpack` or `browserify` to process and bundle the files, specified using the `options.bundler` parameter (as seen in the configuration example below).
 
 <sub>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</sub>
 
 __gulp coffeescript__
 
-Compiles `.coffee` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. Just like in the `javascript` task, you can use either `webpack` or `browserify` to bundle the files.
+Compiles `.coffee` files and outputs them to the build folder, then minifies them and outputs them in dist. Just like in the `javascript` task, you can use either `webpack` or `browserify` to bundle the files.
 
 <sub>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</sub>
 
 __gulp typescript__
 
-Compiles `.ts` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. Just like in the `javascript` task, you can use either `webpack` or `browserify` to bundle the files.
+Compiles `.ts` files and outputs them to the build folder, then minifies them and outputs them in dist. Just like in the `javascript` task, you can use either `webpack` or `browserify` to bundle the files.
 
 <sub>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</sub>
 
 __gulp images__
 
-Optimizes `.svg`, `.jpg`, `.png`, and `.gif` files and outputs them to the `build` and `dist` folders.
+Optimizes `.svg`, `.jpg`, `.png`, and `.gif` files and outputs them to the build and dist folders.
 
 __gulp fonts__
 
-Copies `.eot`, `.svg`, `.ttf`, `.woff`, and `.woff2` files to the `build` and `dist` folders.
+Copies `.eot`, `.svg`, `.ttf`, `.woff`, and `.woff2` files to the build and dist folders.
 
 
 ## Configuration
@@ -146,7 +146,7 @@ const setup = require('gulp-setup')($, gulp, {
 The tasks present in gulp-setup are made out of two components: `process` and `base`. All other parameters, such as `pattern`, are made available in these components.
 
 ### __Base__ tasks
-The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, `dist` and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
+The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, dist and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
 
 ```js
 // bases/base.js
