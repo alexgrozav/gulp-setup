@@ -20,18 +20,30 @@ By default, gulp-setup comes bundled with a variety of pre-made tasks.
 gulp
 gulp build
 gulp clean
+gulp watch
+gulp lint
 gulp html
+gulp html-lint
 gulp css
+gulp css-lint
 gulp sass
+gulp sass-lint
 gulp stylus
+gulp stylus-lint
 gulp javascript
+gulp javascript-lint
 gulp coffeescript
+gulp coffeescript-lint
 gulp typescript
+gulp typescript-lint
+gulp fonts
+gulp images
+gulp browser-sync
 ```
 
 
 ## Configuration
-Here's a sample configuration for gulp-setup that defines two custom tasks called `mytask` and `myclean` and overrides the options for the existing default `javascript` task. 
+Here's a sample configuration for gulp-setup that defines two custom tasks called `mytask` and `myclean` and overrides the options for the existing default `javascript` task.
 
 The `tasks` object key defines the name of the gulp task.
 
@@ -76,7 +88,7 @@ module.exports = ($, gulp, config, task) => () =>
     .pipe(task.process.init())     // Initialization hook
     .pipe($.debug())
     .pipe(task.process.build())    // Building hook
-    .pipe(gulp.dest(config.build)) 
+    .pipe(gulp.dest(config.build))
     .pipe(task.process.dist())     // Distribution hook
     .pipe(gulp.dest(config.dist))
     .pipe(task.process.end());     // Ending hook
