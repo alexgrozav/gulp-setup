@@ -9,6 +9,6 @@ module.exports = {
     ]
   },
   dist: {
-    presets: ['babili']
+    presets: ['minify']
   }
 }
