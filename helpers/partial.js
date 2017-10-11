@@ -23,6 +23,18 @@ const languages = {
     partial: /\_[^\\\/]+\.js$/,
     include: /(require\s*\(\s*|import(\s+.+\s+from)?\s+)[\'\"]?([^\'\"\s]+)[\'\"]\s*\)?/g,
     match: 3
+  },
+  typescript: {
+    ext: ['js'],
+    partial: /\_[^\\\/]+\.ts$/,
+    include: /(require\s*\(\s*|import(\s+.+\s+from)?\s+)[\'\"]?([^\'\"\s]+)[\'\"]\s*\)?/g,
+    match: 3
+  },
+  coffeescript: {
+    ext: ['coffee'],
+    partial: /\_[^\\\/]+\.coffee$/,
+    include: /(require\s*\(\s*|import(\s+.+\s+from|require\s+)?\s+)[\'\"]?([^\'\"\s]+)[\'\"]\s*\)?/g,
+    match: 3
   }
 };
 

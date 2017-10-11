@@ -1,6 +1,6 @@
 module.exports = ($, gulp, config, task) => {
   const partial = require($.path.join(__dirname, '..', 'helpers', 'partial'))($, task, {
-    ext: ['js']
+    language: 'typescript'
   });
 
 
@@ -27,11 +27,11 @@ module.exports = ($, gulp, config, task) => {
 
 
   return {
-    // init: $.lazypipe()
-    //   .pipe($.tap, partial.process),
+    init: $.lazypipe()
+      .pipe($.tap, partial.process),
 
     build: $.lazypipe()
-      // .pipe($.ignore, partial.check)
+      .pipe($.ignore, partial.check)
       .pipe(compile)
       .pipe($.babel, options.build),
 
