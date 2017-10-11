@@ -29,7 +29,7 @@ module.exports = ($, gulp, config) => {
     debug: true,
     tasks: {
       'default': {
-        process: () => $.runSequence('browser-sync', 'build')
+        process: () => $.runSequence('build', 'browser-sync', 'watch')
       },
       'build': {
         process: $.path.join(__dirname, 'tasks', 'build')

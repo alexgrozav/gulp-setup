@@ -17,6 +17,12 @@ const languages = {
     ext: ['styl'],
     partial: /\_[^\\\/]+\.styl$/,
     include: /\@(import|require)\s+[\'\"]([^\'\"]+)[\'\"]/g
+  },
+  javascript: {
+    ext: ['js'],
+    partial: /\_[^\\\/]+\.js$/,
+    include: /(require\s*\(\s*|import(\s+.+\s+from)?\s+)[\'\"]?([^\'\"\s]+)[\'\"]\s*\)?/g,
+    match: 3
   }
 };
 
@@ -62,15 +68,16 @@ module.exports = ($, task, options) => {
 
 
     while(match = pattern.exec(contents)) {
-      let matchRelative = match[2];
-      let matchDirname = path.dirname(match[2]);
+      let matchPosition = languages[options.language].match || 2
+      let matchRelative = match[matchPosition];
+      let matchDirname = path.dirname(match[matchPosition]);
       let matchBasename = matchRelative.split('/').reverse()[0];
 
       // Link basename.ext, _basename.ext and basename/index.ext to the file
       // being currently processed
       //
       languages[options.language].ext.forEach((ext) => {
-        if (/\.[^\.]+$/.test(matchRelative)) {
+        if (/\.[^\.\/\\]+$/.test(matchRelative)) {
           helper.link(path.resolve(dirname, matchDirname, matchBasename), filepath);
         } else {
           helper.link(path.resolve(dirname, matchDirname, matchBasename, 'index.' + ext), filepath);
