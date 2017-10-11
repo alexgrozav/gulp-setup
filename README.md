@@ -15,7 +15,7 @@ const $ = require('gulp-load-plugins')({ config: packages });
 const setup = require('gulp-setup')($, gulp);
 ```
 
-### Default Tasks
+## Default Tasks
 By default, gulp-setup comes bundled with a variety of pre-made tasks.
 ```
 gulp
@@ -41,6 +41,66 @@ gulp fonts
 gulp images
 gulp browser-sync
 ```
+
+#### `gulp`
+The `default` task will run a sequence of `build`, `browser-sync`, and `watch`, as you would usually do in gulp.
+
+#### `gulp build`
+By default, the build task will execute the `clean` task, after which it runs all the other tasks that provide a `pattern` parameter.
+
+#### `gulp clean`
+This task will remove the existing `build` and `dist` folders.
+
+#### `gulp watch`
+The `watch` task will watch for changes and rebuild any task that provides a `pattern` parameter. In addition to this, `gulp-setup` creates a `partials graph`, which will rebuild any file that depends on the one that got changed.
+
+#### `gulp lint`
+This task will run any task that ends with `-lint`.
+
+#### `gulp html`
+Copies `.html` files to the `build` folder, then minifies them and outputs them in `dist`.
+
+#### `gulp css`
+Autoprefixes `.css` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`.
+
+#### `gulp sass`
+Compiles and autoprefixes `.sass` and `.scss` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`.
+
+<small>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</small>
+
+#### `gulp stylus`
+Compiles and autoprefixes `.styl` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. Stylus instance also provides `rucksack-css` functionality.
+
+<small>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</small>
+
+#### `gulp javascript`
+Compiles ES6 `.js` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. The `javascript` task can use either `webpack` or `browserify` to process and bundle the files.
+
+```
+javascript: {
+  options: {
+    bundler: 'webpack'
+  }
+}
+```
+
+<small>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</small>
+
+#### `gulp coffeescript`
+Compiles `.coffee` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. Just like in the `javascript` task, you can use either `webpack` or `browserify` to bundle the files.
+
+<small>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</small>
+
+#### `gulp typescript`
+Compiles `.ts` files and outputs them to the `build` folder, then minifies them and outputs them in `dist`. Just like in the `javascript` task, you can use either `webpack` or `browserify` to bundle the files.
+
+<small>This task makes use of the `partials graph`, meaning that any changes on a partial will trigger a rebuild on the parent files.</small>
+
+#### `gulp images`
+Optimizes `.svg`, `.jpg`, `.png`, and `.gif` files and outputs them to the `build` and `dist` folders.
+
+#### `gulp fonts`
+Copies `.eot`, `.svg`, `.ttf`, `.woff`, and `.woff2` files to the `build` and `dist` folders.
 
 
 ## Configuration
