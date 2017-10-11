@@ -9,8 +9,9 @@ npm install gulp gulp-load-plugins gulp-setup --save-dev
 ## Sample `gulpfile.js`
 Setting up gulp using gulp-setup is simpler than ever.
 ```js
+const packages = require('gulp-setup/package.json');
 const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+const $ = require('gulp-load-plugins')({ config: packages });
 const setup = require('gulp-setup')($, gulp);
 ```
 
@@ -48,8 +49,9 @@ Here's a sample configuration for gulp-setup that defines two custom tasks calle
 The `tasks` object key defines the name of the gulp task.
 
 ```js
+const packages = require('gulp-setup/package.json');
 const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+const $ = require('gulp-load-plugins')({ config: packages });
 const setup = require('gulp-setup')($, gulp, {
   src: 'path/to/src',
   build: 'path/to/build',
