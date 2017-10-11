@@ -1,10 +1,11 @@
-let isString = (v) => typeof v === 'string' || v instanceof String
+const options = require('merge-options');
+const isString = (v) => typeof v === 'string' || v instanceof String
 
 
 module.exports = ($, gulp, config, task) => {
   if (task.extends) {
-    task.base = config.tasks[task.extends].base;
-    task.process = config.tasks[task.extends].process;
+    task = options(config.tasks[task.extends], task)
+    console.log(task)
   }
 
   if (isString(task.base)) {

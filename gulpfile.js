@@ -1,19 +1,29 @@
-const gulp = require('gulp');
-const plugins = require('gulp-load-plugins')();
 const path = require('path');
 
-
-require(path.join(__dirname, 'index'))(plugins, gulp, {
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
+const setup = require(path.join(__dirname, 'index'))($, gulp, {
   paths: {
     src: path.join(__dirname, 'tests', 'src'),
     build: path.join(__dirname, 'tests', 'build'),
     dist: path.join(__dirname, 'tests', 'dist')
   },
   tasks: {
-    javascript: {
+    'javascript': {
       filter: {
         dist: ['**/script.js']
+      }
+    },
+    'javascript-extended': {
+      extends: 'javascript',
+      pattern: '**/*.jsx',
+      paths: {
+        src: path.join(__dirname, 'tests', 'custom-src'),
+        build: false,
+        dist: path.join(__dirname, 'tests', 'custom-dist'),
       }
     }
   }
 });
+
+console.log(setup.gulp.tasks['javascript-extended'].fn.toString())

@@ -110,7 +110,7 @@ Copies `.eot`, `.svg`, `.ttf`, `.woff`, and `.woff2` files to the build and dist
 
 
 ## Configuration
-Here's a sample configuration for gulp-setup that defines two custom tasks called `mytask` and `myclean`, overrides the options for the existing default `javascript` task, and creates a new gulp task called `javascript-docs` by extending the base `javascript` one.
+Here's a sample configuration for gulp-setup that sets the options for the existing default `javascript` task, and creates a new gulp task called `javascript-ext` by extending the base `javascript` one. You can override any of the default task parameters when extending a task.
 
 The `tasks` object key defines the name of the gulp task.
 
@@ -132,10 +132,10 @@ const setup = require('gulp-setup')($, gulp, {
         bundler: 'webpack'
       }
     },
-    'javascript-docs': {
+    'javascript-ext': {
       extends: 'javascript',
       paths: {
-        src: 'path/to/docs'
+        src: 'path/to/custom-src'
       }
     }
   }
@@ -151,7 +151,12 @@ const setup = require('gulp-setup')($, gulp, {
     'mytask': {
       base: './bases/base',
       process: './tasks/mytask',
-      pattern: '**/*.css'
+      pattern: '**/*.css',
+      paths: {
+        src: 'path/to/custom-src',
+        build: 'path/to/custom-build',
+        dist: 'path/to/custom-dist'
+      }
     }
   }
 });
@@ -164,13 +169,13 @@ The `base` task serves as a template for other tasks. It makes four pipeline hoo
 // bases/base.js
 
 module.exports = ($, gulp, config, task) => () =>
-  gulp.src($.path.join(config.paths.src, task.pattern))
+  gulp.src($.path.join(config.task.src || config.paths.src, task.pattern))
     .pipe(task.process.init())     // Initialization hook
     .pipe($.debug())
     .pipe(task.process.build())    // Building hook
-    .pipe(gulp.dest(config.paths.build))
+    .pipe(gulp.dest(config.task.build || config.paths.build))
     .pipe(task.process.dist())     // Distribution hook
-    .pipe(gulp.dest(config.paths.dist))
+    .pipe(gulp.dest(config.task.dist || config.paths.dist))
     .pipe(task.process.end());     // Ending hook
 ```
 
