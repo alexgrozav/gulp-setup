@@ -187,6 +187,8 @@ module.exports = ($, gulp, config) => {
   // Create gulp tasks for each task in the configuration
   //
   Object.keys(config.tasks).forEach((name) => {
+    if(!config.tasks[name]) return;
+
     config.tasks[name].name = name;
     gulp.task(name, loadTask($, gulp, config, config.tasks[name]));
   });
