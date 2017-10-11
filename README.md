@@ -110,7 +110,7 @@ Copies `.eot`, `.svg`, `.ttf`, `.woff`, and `.woff2` files to the build and dist
 
 
 ## Configuration
-Here's a sample configuration for gulp-setup that defines two custom tasks called `mytask` and `myclean` and overrides the options for the existing default `javascript` task.
+Here's a sample configuration for gulp-setup that defines two custom tasks called `mytask` and `myclean`, overrides the options for the existing default `javascript` task, and creates a new gulp task called `javascript-docs` by extending the base `javascript` one.
 
 The `tasks` object key defines the name of the gulp task.
 
@@ -127,17 +127,15 @@ const setup = require('gulp-setup')($, gulp, {
   cache: true,
   debug: true,
   tasks: {
-    mytask: {
-      process: './tasks/mytask',
-      base: './bases/base',
-      pattern: '**/*.css'
-    },
-    myclean: {
-      process: './tasks/myclean'
-    },
-    javascript: {
+    'javascript': {
       options: {
         bundler: 'webpack'
+      }
+    },
+    'javascript-docs': {
+      extends: 'javascript',
+      paths: {
+        src: 'path/to/docs'
       }
     }
   }
@@ -146,6 +144,18 @@ const setup = require('gulp-setup')($, gulp, {
 
 ## Writing a task
 The tasks present in gulp-setup are made out of two components: `process` and `base`. All other parameters, such as `pattern`, are made available in these components.
+
+```js
+const setup = require('gulp-setup')($, gulp, {
+  tasks: {
+    'mytask': {
+      base: './bases/base',
+      process: './tasks/mytask',
+      pattern: '**/*.css'
+    }
+  }
+});
+```
 
 ### __Base__ tasks
 The `base` task serves as a template for other tasks. It makes four pipeline hooks available: `init`, `build`, dist and `end` for integrating a process into it. If the `base` task is missing, then the `process` is considered as a standalone task and won't use a template.
@@ -167,7 +177,7 @@ module.exports = ($, gulp, config, task) => () =>
 The gulp-setup package provides you with the following premade bases: `gulp-setup/bases/base`, `gulp-setup/bases/compile` and `gulp-setup/bases/lint`. You can use these bases for your custom process tasks.
 
 ### __Process__ tasks
-The process task is the main processing that the task is concerned with. It can either be a standalone gulp task, or if combined with a `base` task, it will provide the base hooks for the `base` template.
+The process task is the main processing that the task is concerned with. Process tasks normally use a __template__,  a `base` task that they integrate with by providing `init`, `build`, `dist` or `end` hooks. Alternatively, you can write the process as a __standalone__ gulp task.
 
 __Template__
 ```js
