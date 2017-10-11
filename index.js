@@ -23,9 +23,9 @@ module.exports = ($, gulp, config) => {
    */
   config = options({
     paths: {
-      src: $.path.join(__dirname, 'src'),
-      build: $.path.join(__dirname, 'build'),
-      dist: $.path.join(__dirname, 'dist')
+      src: $.path.join(process.cwd(), 'src'),
+      build: $.path.join(process.cwd(), 'build'),
+      dist: $.path.join(process.cwd(), 'dist')
     },
     cache: true,
     debug: true,
