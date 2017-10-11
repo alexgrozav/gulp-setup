@@ -35,7 +35,7 @@ module.exports = ($, gulp, config, task) => () => {
 
     // Process files for local development use
     //
-    .pipe($.if(!!(task.build || config.build), () => gulp.dest(task.build || config.build)))
+    .pipe($.if(!!(task.build || config.build), $.lazypipe().pipe(gulp.dest, task.build || config.build || '')()))
 
     // Stream and synchronize files to the browser
     //
@@ -51,7 +51,7 @@ module.exports = ($, gulp, config, task) => () => {
 
     // Process files for distribution
     //
-    .pipe($.if(!!(task.dist || config.dist), () => gulp.dest(task.dist || config.dist)))
+    .pipe($.if(!!(task.dist || config.dist), $.lazypipe().pipe(gulp.dest, task.dist || config.dist || '')()))
 
     // Filter files that are going through the end pipeline
     //
