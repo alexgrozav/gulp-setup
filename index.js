@@ -197,7 +197,7 @@ module.exports = ($, gulp, config) => {
   });
 
 
-  module.exports = {
+  return {
     gulp: gulp,
     plugins: $
   };
