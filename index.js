@@ -173,6 +173,7 @@ module.exports = ($, gulp, config) => {
       },
       'browser-sync': {
         process: $.path.join(__dirname, 'tasks', 'browser-sync'),
+        dependencies: [],
         options: {
           port: 3000,
           proxy: 'localhost:3030',
@@ -190,7 +191,9 @@ module.exports = ($, gulp, config) => {
     if(!config.tasks[name]) return;
 
     config.tasks[name].name = name;
-    gulp.task(name, loadTask($, gulp, config, config.tasks[name]));
+    config.tasks[name].dependencies = config.tasks[name].dependencies || [];
+
+    gulp.task(name, config.tasks[name].dependencies, loadTask($, gulp, config, config.tasks[name]));
   });
 
 
