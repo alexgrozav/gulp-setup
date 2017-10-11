@@ -1,6 +1,6 @@
 {
   "name": "gulp-setup",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The perfect gulp setup. Get fast and hassle-free web development project automation.",
   "main": "index.js",
   "dependencies": {
