@@ -70,8 +70,11 @@ module.exports = ($, task, options) => {
       // being currently processed
       //
       languages[options.language].ext.forEach((ext) => {
-        if (!/\.[^\.]+$/.test(matchRelative))
+        if (/\.[^\.]+$/.test(matchRelative)) {
+          helper.link(path.resolve(dirname, matchDirname, matchBasename), filepath);
+        } else {
           helper.link(path.resolve(dirname, matchDirname, matchBasename, 'index.' + ext), filepath);
+        }
         helper.link(path.resolve(dirname, matchDirname, matchBasename + '.' + ext), filepath);
         helper.link(path.resolve(dirname, matchDirname, '_' + matchBasename + '.' + ext), filepath);
       });
