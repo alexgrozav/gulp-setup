@@ -4,8 +4,7 @@ const isString = (v) => typeof v === 'string' || v instanceof String
 
 module.exports = ($, gulp, config, task) => {
   if (task.extends) {
-    task = options(config.tasks[task.extends], task)
-    console.log(task)
+    task = options(config.tasks[task.extends], task);
   }
 
   if (isString(task.base)) {
