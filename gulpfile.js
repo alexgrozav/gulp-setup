@@ -24,5 +24,3 @@ const setup = require(path.join(__dirname, 'index'))($, gulp, {
     }
   }
 });
-
-console.log(setup.config)
