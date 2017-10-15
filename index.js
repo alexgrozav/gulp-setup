@@ -201,7 +201,8 @@ module.exports = ($, gulp, config) => {
 
 
   return {
+    plugins: $,
     gulp: gulp,
-    plugins: $
+    config: config
   };
 };
