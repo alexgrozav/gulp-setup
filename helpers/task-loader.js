@@ -21,5 +21,6 @@ module.exports = ($, gulp, config, task) => {
     });
   }
 
+  config[task.name] = task;
   return task.base || task.process;
 }

@@ -16,7 +16,6 @@ const setup = require(path.join(__dirname, 'index'))($, gulp, {
     },
     'javascript-extended': {
       extends: 'javascript',
-      pattern: '**/*.jsx',
       paths: {
         src: path.join(__dirname, 'tests', 'custom-src'),
         build: false,
@@ -25,3 +24,5 @@ const setup = require(path.join(__dirname, 'index'))($, gulp, {
     }
   }
 });
+
+console.log(setup.config)
