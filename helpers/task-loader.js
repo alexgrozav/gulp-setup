@@ -35,10 +35,15 @@ module.exports = ($, gulp, config, task) => {
       require(task.process)($, gulp, config, task) :
       {};
 
+    // Initialize task hooks
     ['init', 'build', 'dist', 'end'].forEach((step) => {
       task.process[step] = task.process[step] || $.util.noop;
     });
   }
+
+  // Replace original task description with the processed one
+  //
+  config.tasks[task.name] = task;
 
   return task.base || task.process;
 }
