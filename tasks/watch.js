@@ -1,9 +1,13 @@
 module.exports = ($, gulp, config, task) => () => {
   Object.keys(config.tasks).forEach((name) => {
     let pattern = config.tasks[name].pattern;
+    let watch = config.tasks[name].related.watch;
 
-    if(pattern && config.tasks[name].watch !== false) {
-      gulp.watch($.path.join(config.paths.src, pattern), [name]);
+    if (watch !== false && pattern) {
+      gulp.watch($.path.join(config.tasks[name].paths.src, pattern), [name]);
+
+      // @TODO Add possibility of specifying additional task watch options,
+      //       perhaps overriding?
     }
   });
 }
