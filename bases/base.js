@@ -1,7 +1,6 @@
-let getFilter = (task, step) => task.filter && task.filter[step] ? task.filter[step] : (() => true)
-
-
 module.exports = ($, gulp, config, task) => () =>
+  const dest = require($.path.join(__dirname, '..', 'helpers', 'task-process-dest'))($, gulp, config, task);
+
   gulp.src($.path.join(task.paths.src || config.paths.src, task.pattern))
     // Stream task initialization process
     //
@@ -17,7 +16,7 @@ module.exports = ($, gulp, config, task) => () =>
 
     // Process files for local development use
     //
-    .pipe($.if(!!(task.paths.build || config.paths.build) && task.paths.build !== false, $.lazypipe().pipe(gulp.dest, task.paths.build || config.paths.build || '')()))
+    .pipe(dest('build'))
 
     // Run dist process
     //
@@ -25,7 +24,7 @@ module.exports = ($, gulp, config, task) => () =>
 
     // Process files for distribution
     //
-    .pipe($.if(!!(task.paths.dist || config.paths.dist) && task.paths.dist !== false, $.lazypipe().pipe(gulp.dest, task.paths.dist || config.paths.dist || '')()))
+    .pipe(dest('dist'))
 
     // Stream task ending process
     //

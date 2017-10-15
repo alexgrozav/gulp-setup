@@ -194,6 +194,7 @@ module.exports = ($, gulp, config) => {
 
     config.tasks[name].name = name;
     config.tasks[name].dependencies = config.tasks[name].dependencies || [];
+    config.tasks[name].related = config.tasks[name].related || {};
     config.tasks[name].paths = options(config.paths, config.tasks[name].paths);
 
     gulp.task(name, config.tasks[name].dependencies, loadTask($, gulp, config, config.tasks[name]));

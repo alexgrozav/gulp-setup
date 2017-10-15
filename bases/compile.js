@@ -1,11 +1,11 @@
-let getFilter = (task, step) => task.filter && task.filter[step] ? task.filter[step] : (() => true)
-
-
 module.exports = ($, gulp, config, task) => () => {
+  const filter = require($.path.join(__dirname, '..', 'helpers', 'task-process-filter'));
+  const dest = require($.path.join(__dirname, '..', 'helpers', 'task-process-dest'))($, gulp, config, task);
+
   gulp.src($.path.join(task.paths.src || config.paths.src, task.pattern))
     // Filter files that are going through the build pipeline
     //
-    .pipe($.filter(getFilter(task, 'init')))
+    .pipe($.filter(filter(task, 'init')))
 
     // Stream task initialization process
     //
@@ -25,7 +25,7 @@ module.exports = ($, gulp, config, task) => () => {
 
     // Filter files that are going through the build pipeline
     //
-    .pipe($.filter(getFilter(task, 'build')))
+    .pipe($.filter(filter(task, 'build')))
 
     // Run build process and write sourcemaps
     //
@@ -35,7 +35,7 @@ module.exports = ($, gulp, config, task) => () => {
 
     // Process files for local development use
     //
-    .pipe($.if(!!(task.paths.build || config.paths.build) && task.paths.build !== false, $.lazypipe().pipe(gulp.dest, task.paths.build || config.paths.build || '')()))
+    .pipe(dest('build'))
 
     // Stream and synchronize files to the browser
     //
@@ -43,7 +43,7 @@ module.exports = ($, gulp, config, task) => () => {
 
     // Filter files that are going through the build pipeline
     //
-    .pipe($.filter(getFilter(task, 'dist')))
+    .pipe($.filter(filter(task, 'dist')))
 
     // Run dist process
     //
@@ -51,11 +51,11 @@ module.exports = ($, gulp, config, task) => () => {
 
     // Process files for distribution
     //
-    .pipe($.if(!!(task.paths.dist || config.paths.dist) && task.paths.dist !== false, $.lazypipe().pipe(gulp.dest, task.paths.dist || config.paths.dist || '')()))
+    .pipe(dest('dist'))
 
     // Filter files that are going through the end pipeline
     //
-    .pipe($.filter(getFilter(task, 'end')))
+    .pipe($.filter(filter(task, 'end')))
 
     // Stream task ending process
     //

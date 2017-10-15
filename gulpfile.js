@@ -10,16 +10,21 @@ const setup = require(path.join(__dirname, 'index'))($, gulp, {
   },
   tasks: {
     'javascript': {
-      filter: {
-        dist: ['**/script.js']
+      paths: {
+        dist: [
+          path.join(__dirname, 'tests', 'dist', 'javascript-1'),
+          path.join(__dirname, 'tests', 'dist', 'javascript-2'),
+          path.join(__dirname, 'tests', 'dist', 'javascript-3')
+        ]
       }
     },
     'javascript-extended': {
       extends: 'javascript',
       paths: {
-        src: path.join(__dirname, 'tests', 'custom-src'),
-        build: false,
-        dist: path.join(__dirname, 'tests', 'custom-dist'),
+        dist: path.join(__dirname, 'tests', 'dist', 'bundle')
+      },
+      filter: {
+        dist: ['**/script.js']
       }
     }
   }
