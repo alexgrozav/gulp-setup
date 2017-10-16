@@ -1,5 +1,5 @@
 # The perfect gulp setup
-This project aims to create a modular and configurable gulp setup. Get project automation up and running with minimum involvement.
+This project aims to create a modular and configurable gulp setup. Get project automation up and running with minimum involvement. Gulp-setup is written and maintained by [@alexgrozav](https://twitter.com/alexgrozav).
 
 ```
 npm install gulp-cli -g
